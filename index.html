@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thomas Le - Full Stack Developer Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="profile-section">
+                <img src="public/img/avatar.jpeg" alt="Thomas Le" class="avatar">
+                <h1>Thomas Le</h1>
+                <p class="subtitle">Full Stack Developer | AI Engineer | Game Developer</p>
+                <div class="contact-links">
+                    <a href="mailto:lttcyborg@gmail.com">📧 Email</a>
+                    <a href="https://linkedin.com/in/altterisk" target="_blank">💼 LinkedIn</a>
+                    <a href="https://github.com/anyabot" target="_blank">🔗 GitHub 1</a>
+                    <a href="https://github.com/Altterisk" target="_blank">🔗 GitHub 2</a>
+                    <a href="tel:+61480606729">📱 +61 480 606 729</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#education">Education</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <p>Versatile and driven software developer currently pursuing a Master of Artificial Intelligence at Queensland University of Technology. Skilled in AI development, backend systems, web technologies, and game development.</p>
+                <p>With hands-on experience building high-accuracy OCR models, deploying applications using Docker, and developing cross-platform games with Unity, I bring a diverse skill set to innovative technology teams.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+            
+            <!-- Filter Buttons -->
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="group">Group Projects</button>
+                <button class="filter-btn" data-filter="personal">Personal Projects</button>
+                <button class="filter-btn" data-filter="web">Web Development</button>
+                <button class="filter-btn" data-filter="ai">AI/ML</button>
+            </div>
+
+            <div class="projects-grid">
+                <!-- MineManager -->
+                <div class="project-card" data-category="group web ai">
+                    <div class="project-header">
+                        <h3>MineManager</h3>
+                        <span class="project-status">Ongoing</span>
+                    </div>
+                    <p class="project-description">Unified web platform for mining project management, consolidating tasks, documents, and collaboration tools for OreFox AI Limited.</p>
+                    <div class="project-details">
+                        <h4>Key Features:</h4>
+                        <ul>
+                            <li>Hierarchical task boards with Gantt chart visualization</li>
+                            <li>AI-driven document tagging and centralized knowledge base</li>
+                            <li>Real-time collaboration tools with audit trails</li>
+                            <li>Automated document parsing and metadata extraction</li>
+                        </ul>
+                        <h4>My Contributions:</h4>
+                        <ul>
+                            <li>Designed and implemented core features using Django with HTMX</li>
+                            <li>Revamped database structure for hierarchical task management</li>
+                            <li>Developed front-end components for Gantt charts and task boards</li>
+                            <li>Integrated RESTful APIs for seamless service communication</li>
+                        </ul>
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Django</span>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">HTMX</span>
+                        <span class="tech-tag">PostGIS</span>
+                        <span class="tech-tag">NLP</span>
+                    </div>
+                </div>
+
+                <!-- Learning Management System -->
+                <div class="project-card" data-category="group web">
+                    <div class="project-header">
+                        <h3>Learning Management System</h3>
+                        <span class="project-status completed">Completed</span>
+                    </div>
+                    <p class="project-description">Full-stack LMS supporting course creation, user management, and secure authentication for online learning environments.</p>
+                    <div class="project-details">
+                        <h4>Key Features:</h4>
+                        <ul>
+                            <li>Role-based access control (Admin, Faculty, Student)</li>
+                            <li>Complete CRUD operations for course management</li>
+                            <li>Course assignment notification system with real-time updates</li>
+                            <li>User listing with advanced filtering capabilities</li>
+                            <li>Cross-platform compatibility (Windows, macOS, Linux)</li>
+                        </ul>
+                        <h4>Technical Highlights:</h4>
+                        <ul>
+                            <li>Implemented CI/CD pipeline with GitHub Actions</li>
+                            <li>Deployed on AWS EC2 with PM2 process management</li>
+                            <li>Secure authentication ensuring validated user access</li>
+                        </ul>
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">Express</span>
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">MongoDB</span>
+                        <span class="tech-tag">AWS</span>
+                        <span class="tech-tag">Tailwind CSS</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Altterisk/A1---Learning-Management-System" target="_blank" class="btn-primary">View Source</a>
+                    </div>
+                </div>
+
+                <!-- Discord Bots -->
+                <div class="project-card" data-category="personal web">
+                    <div class="project-header">
+                        <h3>Discord Bot Collection</h3>
+                        <span class="project-status completed">Deployed</span>
+                    </div>
+                    <p class="project-description">Multiple Discord bots for gaming communities combining real-time data retrieval with interactive mini-games.</p>
+                    <div class="project-details">
+                        <h4>Features:</h4>
+                        <ul>
+                            <li>Real-time game information retrieval through web scraping</li>
+                            <li>Interactive mini-games (Wordle, Word Scramble)</li>
+                            <li>Custom RESTful API queries for wiki data parsing</li>
+                            <li>Modular architecture for easy maintenance</li>
+                            <li>Deployed on Fly.io serving active communities</li>
+                        </ul>
+                        <h4>Contributions:</h4>
+                        <ul>
+                            <li>Developed two production bots deployed on Fly.io</li>
+                            <li>Contributed to QUT Code Network's open-source bot</li>
+                        </ul>
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">TypeScript</span>
+                        <span class="tech-tag">Web Scraping</span>
+                        <span class="tech-tag">RESTful APIs</span>
+                        <span class="tech-tag">Fly.io</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/anyabot/new-lo-bot" target="_blank" class="btn-secondary">Bot 1 Source</a>
+                        <a href="https://github.com/anyabot/new-quill-bot" target="_blank" class="btn-secondary">Bot 2 Source</a>
+                        <a href="https://github.com/codenetwork/discord-bot-v3" target="_blank" class="btn-secondary">QUT Bot Source</a>
+                    </div>
+                </div>
+
+                <!-- Enemy Information Site -->
+                <div class="project-card" data-category="personal web">
+                    <div class="project-header">
+                        <h3>Enemy Information Site</h3>
+                        <span class="project-status completed">Live</span>
+                    </div>
+                    <p class="project-description">Responsive website for viewing multilingual enemy data with real-time updates and machine translation integration.</p>
+                    <div class="project-details">
+                        <h4>Features:</h4>
+                        <ul>
+                            <li>Real-time data updates from Firebase Realtime Database</li>
+                            <li>Machine translation integration for multilingual support</li>
+                            <li>State management with Redux for optimal performance</li>
+                            <li>Clean UI design with Chakra UI components</li>
+                            <li>Deployed on Vercel for fast global access</li>
+                        </ul>
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">Next.js</span>
+                        <span class="tech-tag">TypeScript</span>
+                        <span class="tech-tag">Firebase</span>
+                        <span class="tech-tag">Redux</span>
+                        <span class="tech-tag">Chakra UI</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://lomap.vercel.app/" target="_blank" class="btn-primary">View Live Site</a>
+                        <a href="https://github.com/anyabot/LOMapR" target="_blank" class="btn-secondary">View Source</a>
+                    </div>
+                </div>
+
+                <!-- Kanban Demo -->
+                <div class="project-card" data-category="personal web">
+                    <div class="project-header">
+                        <h3>Kanban Board Demo</h3>
+                        <span class="project-status completed">Live</span>
+                    </div>
+                    <p class="project-description">Dynamic Kanban board showcasing advanced drag-and-drop, tagging, and custom filtering capabilities.</p>
+                    <div class="project-details">
+                        <h4>Features:</h4>
+                        <ul>
+                            <li>Advanced drag-and-drop functionality</li>
+                            <li>Custom tagging and filtering system</li>
+                            <li>State management demonstration</li>
+                            <li>Responsive design with Chakra UI</li>
+                            <li>Real-time updates and animations</li>
+                        </ul>
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">Next.js</span>
+                        <span class="tech-tag">TypeScript</span>
+                        <span class="tech-tag">Chakra UI</span>
+                        <span class="tech-tag">Vercel</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://prroject-planner.vercel.app/" target="_blank" class="btn-primary">View Live Demo</a>
+                        <a href="https://github.com/anyabot/Project-Planner" target="_blank" class="btn-secondary">View Source</a>
+                    </div>
+                </div>
+
+                <!-- F1 Result Search Site -->
+                <div class="project-card" data-category="personal web">
+                    <div class="project-header">
+                        <h3>F1 Result Search Site</h3>
+                        <span class="project-status completed">Live</span>
+                    </div>
+                    <p class="project-description">Fast and responsive Formula 1 race results search application with modern UI.</p>
+                    <div class="project-details">
+                        <h4>Features:</h4>
+                        <ul>
+                            <li>Quick search functionality for F1 race results</li>
+                            <li>Modern UI with Tailwind CSS</li>
+                            <li>Responsive design for all devices</li>
+                            <li>Fast performance with Next.js optimization</li>
+                        </ul>
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">Next.js</span>
+                        <span class="tech-tag">TypeScript</span>
+                        <span class="tech-tag">Tailwind CSS</span>
+                        <span class="tech-tag">Vercel</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://races-data.vercel.app/" target="_blank" class="btn-primary">View Live Site</a>
+                        <a href="https://github.com/anyabot/RacesData" target="_blank" class="btn-secondary">View Source</a>
+                    </div>
+                </div>
+
+                <!-- Mod Installer APK -->
+                <div class="project-card" data-category="personal">
+                    <div class="project-header">
+                        <h3>Mod Installer APK</h3>
+                        <span class="project-status completed">Released</span>
+                    </div>
+                    <p class="project-description">Android application for managing mod files with Shizuku API support, bypassing storage restrictions.</p>
+                    <div class="project-details">
+                        <h4>Features:</h4>
+                        <ul>
+                            <li>Bypass modern Android storage restrictions using Shizuku API</li>
+                            <li>Multi-language localization support</li>
+                            <li>Efficient mod file management system</li>
+                            <li>Clean and intuitive Android interface</li>
+                            <li>Secure file operations</li>
+                        </ul>
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Kotlin</span>
+                        <span class="tech-tag">Android Studio</span>
+                        <span class="tech-tag">Shizuku API</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/anyabot/LOModInstaller" target="_blank" class="btn-primary">View Source</a>
+                    </div>
+                </div>
+
+                <!-- Unity Games -->
+                <div class="project-card" data-category="personal">
+                    <div class="project-header">
+                        <h3>Unity Games Portfolio</h3>
+                        <span class="project-status completed">Released</span>
+                    </div>
+                    <p class="project-description">Collection of engaging 2D and 3D games developed during my time at VRillar, showcasing cross-platform game development skills.</p>
+                    <div class="project-details">
+                        <h4>Development Highlights:</h4>
+                        <ul>
+                            <li>Level design, animations, and user interface development</li>
+                            <li>Cross-platform deployment (Android and iOS)</li>
+                            <li>Integration of third-party plugins (Google Play Services, Game Center, Facebook)</li>
+                            <li>Modular, reusable code components</li>
+                            <li>Collaboration with designers and artists</li>
+                        </ul>
+                        <h4>Projects:</h4>
+                        <ul>
+                            <li>Single-developer game projects showcasing full development cycle</li>
+                            <li>Optimized performance for mobile platforms</li>
+                        </ul>
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Unity</span>
+                        <span class="tech-tag">C#</span>
+                        <span class="tech-tag">Android</span>
+                        <span class="tech-tag">iOS</span>
+                        <span class="tech-tag">Git</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://apkpure.com/hyper-block/com.vrillarvn.hyperblock/download" target="_blank" class="btn-secondary">Solo Game 1</a>
+                        <a href="https://apkpure.com/journey-to-find-out/com.journeytofindout" target="_blank" class="btn-secondary">Solo Game 2</a>
+                        <a href="https://apkpure.com/coin-pusher-festival/com.vrillar.coinpusherfestival" target="_blank" class="btn-secondary">Group Game 1</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+        <div class="container">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Frontend Development</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">React.js</span>
+                        <span class="skill-tag">Next.js</span>
+                        <span class="skill-tag">TypeScript</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">HTML5</span>
+                        <span class="skill-tag">CSS3</span>
+                        <span class="skill-tag">Tailwind CSS</span>
+                        <span class="skill-tag">Chakra UI</span>
+                        <span class="skill-tag">HTMX</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Backend Development</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">Express.js</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Django</span>
+                        <span class="skill-tag">FastAPI</span>
+                        <span class="skill-tag">RESTful APIs</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Databases</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">MongoDB</span>
+                        <span class="skill-tag">PostgreSQL</span>
+                        <span class="skill-tag">PostGIS</span>
+                        <span class="skill-tag">Firebase</span>
+                        <span class="skill-tag">Mongoose</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>AI & Machine Learning</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">OCR</span>
+                        <span class="skill-tag">YOLOv5</span>
+                        <span class="skill-tag">NLP</span>
+                        <span class="skill-tag">spaCy</span>
+                        <span class="skill-tag">Hugging Face</span>
+                        <span class="skill-tag">Machine Learning</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>DevOps & Deployment</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">AWS EC2</span>
+                        <span class="skill-tag">GitHub Actions</span>
+                        <span class="skill-tag">CI/CD</span>
+                        <span class="skill-tag">PM2</span>
+                        <span class="skill-tag">Vercel</span>
+                        <span class="skill-tag">Fly.io</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Game Development</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Unity</span>
+                        <span class="skill-tag">C#</span>
+                        <span class="skill-tag">Android</span>
+                        <span class="skill-tag">iOS</span>
+                        <span class="skill-tag">Level Design</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Tools & Methodologies</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">GitHub</span>
+                        <span class="skill-tag">Jira</span>
+                        <span class="skill-tag">Confluence</span>
+                        <span class="skill-tag">Figma</span>
+                        <span class="skill-tag">Agile/Scrum</span>
+                        <span class="skill-tag">Redux</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section">
+        <div class="container">
+            <h2 class="section-title">Work Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">Jul 2023 - Jul 2024</div>
+                    <div class="timeline-content">
+                        <h3>Unity Developer</h3>
+                        <h4>VRillar Vietnam</h4>
+                        <ul>
+                            <li>Developed engaging 2D and 3D games in Unity, including level design, animations, and UI</li>
+                            <li>Enabled game functionality on Android and iOS platforms with optimized performance</li>
+                            <li>Utilized Jira for task tracking and Git for version control</li>
+                            <li>Integrated third-party plugins (Google Play Services, Game Center, Facebook)</li>
+                            <li>Created modular, reusable code components across projects</li>
+                            <li>Coordinated with designers, artists, and developers for cohesive experiences</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Jun 2021 - Sep 2021</div>
+                    <div class="timeline-content">
+                        <h3>AI Engineer</h3>
+                        <h4>EyeQ Tech</h4>
+                        <ul>
+                            <li>Trained OCR model for identification cards and official documents</li>
+                            <li>Developed OCR model for machine-readable zones achieving high accuracy with YOLOv5</li>
+                            <li>Ensured secure data storage with MongoDB</li>
+                            <li>Created backend with Python and FastAPI for API requests</li>
+                            <li>Deployed OCR model using Docker for enhanced scalability</li>
+                            <li>Collaborated with cross-functional teams for seamless integration</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="section">
+        <div class="container">
+            <h2 class="section-title">Education</h2>
+            <div class="education-grid">
+                <div class="education-card">
+                    <h3>Master of Information Technology</h3>
+                    <h4>Queensland University of Technology</h4>
+                    <p class="date">Jul 2024 - Present</p>
+                    <p>Specializing in Artificial Intelligence</p>
+                </div>
+                <div class="education-card">
+                    <h3>Bachelor of Computer Science</h3>
+                    <h4>Korea Advanced Institute of Science & Technology (KAIST)</h4>
+                    <p class="date">Aug 2018 - Feb 2023</p>
+                    <p>GPA: 3.43 / 4.3</p>
+                    <p class="achievement">Full Scholarship for Undergraduate Studies</p>
+                </div>
+                <div class="education-card">
+                    <h3>Academic Honors</h3>
+                    <ul>
+                        <li>Third Prize - Vietnamese Math Olympiad (2017, 2018)</li>
+                        <li>Third Prize - International Mathematics Tournament of the Towns (2017)</li>
+                        <li>First Prize - Math Olympiad by Vietnam Mathematical Society (2018)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Thomas Le. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="mailto:lttcyborg@gmail.com">Email</a>
+                <a href="https://linkedin.com/in/altterisk" target="_blank">LinkedIn</a>
+                <a href="https://github.com/anyabot" target="_blank">GitHub 1</a>
+                <a href="https://github.com/Altterisk" target="_blank">GitHub 2</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
