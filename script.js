@@ -17,6 +17,56 @@ document.querySelectorAll('nav a').forEach(anchor => {
     });
 });
 
+// Masonry layout
+function applyMasonry() {
+    const grid = document.querySelector('.projects-grid');
+    if (!grid || !grid.clientWidth) return;
+
+    const cards = [...grid.querySelectorAll('.project-card:not(.hidden)')];
+    if (!cards.length) { grid.style.height = ''; return; }
+
+    const gap = 30;
+    const cols = window.innerWidth <= 768 ? 1 : 2;
+
+    if (cols === 1) {
+        cards.forEach(card => {
+            card.style.position = '';
+            card.style.left = '';
+            card.style.top = '';
+            card.style.width = '';
+        });
+        grid.style.height = '';
+        return;
+    }
+
+    const colWidth = (grid.clientWidth - gap * (cols - 1)) / cols;
+
+    // Phase 1: set widths so show-more and height measurements use the real column width
+    cards.forEach(card => {
+        card.style.position = 'absolute';
+        card.style.width = colWidth + 'px';
+        card.style.left = '0';
+        card.style.top = '0';
+    });
+
+    // Phase 2: read heights (each offsetHeight read forces a reflow) and place cards
+    const colHeights = Array(cols).fill(0);
+    cards.forEach(card => {
+        const col = colHeights.indexOf(Math.min(...colHeights));
+        card.style.left = col * (colWidth + gap) + 'px';
+        card.style.top = colHeights[col] + 'px';
+        colHeights[col] += card.offsetHeight + gap;
+    });
+
+    grid.style.height = Math.max(...colHeights) - gap + 'px';
+}
+
+let masonryResizeTimer;
+window.addEventListener('resize', () => {
+    clearTimeout(masonryResizeTimer);
+    masonryResizeTimer = setTimeout(applyMasonry, 150);
+});
+
 // Project filtering functionality
 const filterButtons = document.querySelectorAll('.filter-btn');
 const projectCards = document.querySelectorAll('.project-card');
@@ -33,7 +83,6 @@ filterButtons.forEach(button => {
         projectCards.forEach(card => {
             if (filterValue === 'all') {
                 card.classList.remove('hidden');
-                // Add fade-in animation
                 card.style.animation = 'fadeIn 0.5s ease-in';
             } else {
                 const categories = card.getAttribute('data-category');
@@ -45,6 +94,7 @@ filterButtons.forEach(button => {
                 }
             }
         });
+        requestAnimationFrame(applyMasonry);
     });
 });
 
@@ -96,8 +146,9 @@ window.addEventListener('scroll', () => {
     });
 });
 
-// Add loading animation for project cards
+// Initial masonry + card reveal on load
 window.addEventListener('load', () => {
+    applyMasonry();
     projectCards.forEach((card, index) => {
         setTimeout(() => {
             card.style.opacity = '1';
@@ -145,23 +196,94 @@ document.querySelectorAll('.contact-links a, .footer-links a').forEach(link => {
     });
 });
 
-// Lazy loading for images (if you add project images later)
-if ('IntersectionObserver' in window) {
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.dataset.src;
-                img.classList.add('loaded');
-                imageObserver.unobserve(img);
-            }
-        });
+// Lightbox for project screenshots
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const lightboxClose = document.getElementById('lightbox-close');
+const lightboxPrev = document.getElementById('lightbox-prev');
+const lightboxNext = document.getElementById('lightbox-next');
+const lightboxCounter = document.getElementById('lightbox-counter');
+
+let lightboxImages = [];
+let lightboxIndex = 0;
+
+function updateLightboxImage() {
+    lightboxImg.src = lightboxImages[lightboxIndex].src;
+    lightboxImg.alt = lightboxImages[lightboxIndex].alt || '';
+    lightboxPrev.disabled = lightboxIndex === 0;
+    lightboxNext.disabled = lightboxIndex === lightboxImages.length - 1;
+    lightboxCounter.textContent = lightboxImages.length > 1
+        ? `${lightboxIndex + 1} / ${lightboxImages.length}` : '';
+}
+
+function openLightbox(images, index) {
+    lightboxImages = images;
+    lightboxIndex = index;
+    updateLightboxImage();
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+    lightboxImg.src = '';
+}
+
+// Screenshot: wrap each img in .screenshot-thumb, lightbox clicks, "+N more" tile
+document.querySelectorAll('.project-screenshot').forEach(container => {
+    const allImgs = [...container.querySelectorAll('img')];
+
+    allImgs.forEach((img, i) => {
+        const thumb = document.createElement('div');
+        thumb.className = 'screenshot-thumb';
+        if (img.style.display === 'none') {
+            thumb.style.display = 'none';
+            img.style.display = '';
+        }
+        img.parentNode.insertBefore(thumb, img);
+        thumb.appendChild(img);
+        thumb.addEventListener('click', () => openLightbox(allImgs, i));
     });
 
-    document.querySelectorAll('img[data-src]').forEach(img => {
-        imageObserver.observe(img);
-    });
-}
+    const allThumbs = [...container.querySelectorAll('.screenshot-thumb')];
+    const hiddenThumbs = allThumbs.filter(t => t.style.display === 'none');
+
+    if (allImgs.length <= 3) {
+        allThumbs.forEach(t => t.style.display = '');
+        return;
+    }
+
+    if (hiddenThumbs.length === 0) return;
+
+    const moreTile = document.createElement('div');
+    moreTile.className = 'screenshot-more';
+    moreTile.textContent = `+${hiddenThumbs.length} more`;
+    container.appendChild(moreTile);
+
+    const firstHiddenImg = hiddenThumbs[0].querySelector('img');
+    moreTile.addEventListener('click', () => openLightbox(allImgs, allImgs.indexOf(firstHiddenImg)));
+});
+
+lightboxClose.addEventListener('click', closeLightbox);
+lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+
+lightboxPrev.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (lightboxIndex > 0) { lightboxIndex--; updateLightboxImage(); }
+});
+
+lightboxNext.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (lightboxIndex < lightboxImages.length - 1) { lightboxIndex++; updateLightboxImage(); }
+});
+
+document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('active')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft' && lightboxIndex > 0) { lightboxIndex--; updateLightboxImage(); }
+    if (e.key === 'ArrowRight' && lightboxIndex < lightboxImages.length - 1) { lightboxIndex++; updateLightboxImage(); }
+});
 
 // Add scroll-to-top button functionality
 const createScrollToTopButton = () => {

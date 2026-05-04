@@ -43,8 +43,8 @@
         <div class="container">
             <h2 class="section-title">About Me</h2>
             <div class="about-content">
-                <p>Master of Information Technology student at Queensland University of Technology, graduating June 2026. Currently seeking full-time opportunities in software development and IT roles within the Greater Brisbane area.</p>
-                <p>Experienced full stack developer with a proven track record in AI development, backend systems, web technologies, and game development. Skilled in building high-accuracy OCR models, deploying scalable applications, and developing cross-platform solutions using modern frameworks and technologies.</p>
+                <p>Master of Information Technology student at Queensland University of Technology (specialising in AI), graduating June 2026. Currently seeking full-time opportunities in software development and IT roles within the Greater Brisbane Area.</p>
+                <p>Full-stack developer with experience across AI engineering, backend systems, web development, and game development. Recent work includes building LLM-powered agentic pipelines with LangChain and Ollama, NLP document classifiers combining BERT embeddings and ensemble models, real-time collaborative platforms with Django and WebSockets, and React/Next.js frontends deployed on cloud infrastructure. Previously shipped cross-platform mobile games at VRillar and developed high-accuracy OCR systems at EyeQ Tech.</p>
             </div>
         </div>
     </section>
@@ -66,33 +66,90 @@
             <div class="projects-grid">
                 <!-- MineManager -->
                 <div class="project-card" data-category="group web ai">
+                    <div class="project-screenshot">
+                        <img src="public/img/MineManager%201.png" alt="MineManager screenshot 1">
+                        <img src="public/img/MineManager%202.png" alt="MineManager screenshot 2">
+                        <img src="public/img/MineManager%203.png" alt="MineManager screenshot 3" style="display:none">
+                        <img src="public/img/MineManager%204.png" alt="MineManager screenshot 4" style="display:none">
+                        <img src="public/img/MineManager%205.png" alt="MineManager screenshot 5" style="display:none">
+                        <img src="public/img/MineManager%20-%20Version%20History.png" alt="MineManager version history" style="display:none">
+                        <img src="public/img/MineManager%20-%20NLP%20Classifier.png" alt="MineManager NLP classifier" style="display:none">
+                    </div>
                     <div class="project-header">
                         <h3>MineManager</h3>
                         <span class="project-status">Ongoing</span>
                     </div>
-                    <p class="project-description">Unified web platform for mining project management, consolidating tasks, documents, and collaboration tools for OreFox AI Limited.</p>
+                    <p class="project-description">Full-stack enterprise platform for mining project management and document intelligence, built as a group capstone project (QUT INN700, 2026).</p>
                     <div class="project-details">
                         <h4>Key Features:</h4>
                         <ul>
-                            <li>Hierarchical task boards with Gantt chart visualization</li>
-                            <li>AI-driven document tagging and centralized knowledge base</li>
-                            <li>Real-time collaboration tools with audit trails</li>
-                            <li>Automated document parsing and metadata extraction</li>
+                            <li><strong>AI Task Assistant:</strong> Multi-stage conversational agent using LangChain + Ollama (Qwen3:8b) with intent classification, structured tool-use pipelines, and state-machine task generation</li>
+                            <li><strong>NLP Document Classifier:</strong> 7-category mining document classifier combining TF-IDF, Word2Vec, BERT sentence embeddings, and ensemble models (Gradient Boosting, LinearSVC)</li>
+                            <li><strong>Automated Document Processing:</strong> OCR pipeline for 8+ file formats (PDF, DOCX, XLSX, PPTX, images) with KeyBERT keyword extraction and version-controlled storage</li>
+                            <li><strong>Real-Time Collaboration:</strong> WebSocket group chat via Django Channels and Daphne ASGI with async consumers and persistent message history</li>
+                            <li><strong>Custom Gantt Renderer:</strong> 860-line canvas-based Gantt chart with drag-and-drop scheduling, multi-timescale zoom, and live AJAX updates — no library dependency</li>
                         </ul>
                         <h4>My Contributions:</h4>
                         <ul>
-                            <li>Designed and implemented core features using Django with HTMX</li>
-                            <li>Revamped database structure for hierarchical task management</li>
-                            <li>Developed front-end components for Gantt charts and task boards</li>
-                            <li>Integrated RESTful APIs for seamless service communication</li>
+                            <li>Designed and implemented core Django features, database schema, task boards, and RESTful APIs</li>
+                            <li>Built the NLP document classification pipeline with domain-specific feature engineering</li>
+                            <li>Developed the document versioning system with diff tracking and audit history</li>
+                            <li>Implemented full-text search across tasks, documents, and metadata</li>
+                            <li>Authored the canvas-based Gantt chart renderer from scratch</li>
+                        </ul>
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Django 5</span>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">LangChain</span>
+                        <span class="tech-tag">Ollama</span>
+                        <span class="tech-tag">scikit-learn</span>
+                        <span class="tech-tag">PyTorch</span>
+                        <span class="tech-tag">sentence-transformers</span>
+                        <span class="tech-tag">Django Channels</span>
+                        <span class="tech-tag">Tailwind CSS</span>
+                        <span class="tech-tag">Plotly</span>
+                        <span class="tech-tag">SQLite</span>
+                    </div>
+                </div>
+
+                <!-- Vcnity -->
+                <div class="project-card" data-category="group web">
+                    <div class="project-screenshot">
+                        <img src="public/img/Vcnity%20-%20Dashboard.png" alt="Vcnity dashboard">
+                        <img src="public/img/Vcnity%20-%20Study.png" alt="Vcnity study hub">
+                        <img src="public/img/Vcnity%20-%20Welcome%20BBQ.png" alt="Vcnity events" style="display:none">
+                        <img src="public/img/Vcnity%20-%20Community.png" alt="Vcnity community" style="display:none">
+                        <img src="public/img/Vcnity%20-%20Support%20Services.png" alt="Vcnity support services" style="display:none">
+                    </div>
+                    <div class="project-header">
+                        <h3>Vcnity</h3>
+                        <span class="project-status">Prototype</span>
+                    </div>
+                    <p class="project-description">Student engagement platform designed to help university students — particularly international students — connect, collaborate, and navigate campus life through a unified social hub.</p>
+                    <div class="project-details">
+                        <h4>Key Features:</h4>
+                        <ul>
+                            <li>Interest-based onboarding and personalised peer recommendations</li>
+                            <li>Peer Connect for discovering classmates and study partners by shared interests and communities</li>
+                            <li>Study Hub with assignment tracker, weekly planner, and peer help requests</li>
+                            <li>Campus events discovery, community groups, and support services directory</li>
+                            <li>Interactive campus map for navigating university facilities</li>
+                        </ul>
+                        <h4>My Contributions:</h4>
+                        <ul>
+                            <li>Designed and built the full-stack application using Django with custom user model</li>
+                            <li>Implemented smart peer matching algorithm based on shared interests and community membership</li>
+                            <li>Developed study management features including assignment tracking and session planning</li>
+                            <li>Created community and support services modules with categorised filtering</li>
                         </ul>
                     </div>
                     <div class="tech-stack">
                         <span class="tech-tag">Django</span>
                         <span class="tech-tag">Python</span>
-                        <span class="tech-tag">HTMX</span>
-                        <span class="tech-tag">PostGIS</span>
-                        <span class="tech-tag">NLP</span>
+                        <span class="tech-tag">SQLite</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">CSS</span>
                     </div>
                 </div>
 
@@ -200,9 +257,15 @@
 
                 <!-- Reverse 1999 Pull Simulator -->
                 <div class="project-card" data-category="personal web">
+                    <div class="project-screenshot">
+                        <img src="public/img/Gacha%20Pull%20Simulator%201.png" alt="Gacha Pull Simulator screenshot 1">
+                        <img src="public/img/Gacha%20Pull%20Simulator%202.png" alt="Gacha Pull Simulator screenshot 2">
+                        <img src="public/img/Gacha%20Pull%20Simulator%203.png" alt="Gacha Pull Simulator screenshot 3">
+                    </div>
                     <div class="project-header">
                         <h3>Reverse 1999 Pull Simulator</h3>
                         <span class="project-status completed">Live</span>
+                        <span class="project-tag">1-day build</span>
                     </div>
                     <p class="project-description">Statistical gacha pull simulator with budget planning and Monte Carlo simulation to calculate success probability for target units.</p>
                     <div class="project-details">
@@ -263,9 +326,15 @@
 
                 <!-- Kanban Demo -->
                 <div class="project-card" data-category="personal web">
+                    <div class="project-screenshot">
+                        <img src="public/img/Kanban%20Board%201.png" alt="Kanban Board screenshot 1">
+                        <img src="public/img/Kanban%20Board%202.png" alt="Kanban Board screenshot 2">
+                        <img src="public/img/Kanban%20Board%203.png" alt="Kanban Board screenshot 3">
+                    </div>
                     <div class="project-header">
                         <h3>Kanban Board Demo</h3>
                         <span class="project-status completed">Live</span>
+                        <span class="project-tag">1-day build</span>
                     </div>
                     <p class="project-description">Dynamic Kanban board showcasing advanced drag-and-drop, tagging, and custom filtering capabilities.</p>
                     <div class="project-details">
@@ -296,6 +365,7 @@
                     <div class="project-header">
                         <h3>F1 Result Search Site</h3>
                         <span class="project-status completed">Live</span>
+                        <span class="project-tag">1-day build</span>
                     </div>
                     <p class="project-description">Fast and responsive Formula 1 race results search application with modern UI.</p>
                     <div class="project-details">
@@ -349,6 +419,18 @@
 
                 <!-- Unity Games -->
                 <div class="project-card" data-category="personal">
+                    <div class="project-screenshot">
+                        <img src="public/img/Coin%20Pusher%20Festival%201.jpg" alt="Coin Pusher Festival screenshot 1">
+                        <img src="public/img/Coin%20Pusher%20Festival%202.jpg" alt="Coin Pusher Festival screenshot 2">
+                        <img src="public/img/Coin%20Pusher%20Festival%203.jpg" alt="Coin Pusher Festival screenshot 3" style="display:none">
+                        <img src="public/img/Coin%20Pusher%20Festival%204.jpg" alt="Coin Pusher Festival screenshot 4" style="display:none">
+                        <img src="public/img/Coin%20Pusher%20Festival%205.jpg" alt="Coin Pusher Festival screenshot 5" style="display:none">
+                        <img src="public/img/Journey%20to%20find%20out%201.jpg" alt="Journey to Find Out screenshot 1" style="display:none">
+                        <img src="public/img/Journey%20to%20find%20out%202.jpg" alt="Journey to Find Out screenshot 2" style="display:none">
+                        <img src="public/img/Journey%20to%20find%20out%203.jpg" alt="Journey to Find Out screenshot 3" style="display:none">
+                        <img src="public/img/Journey%20to%20find%20out%204.jpg" alt="Journey to Find Out screenshot 4" style="display:none">
+                        <img src="public/img/Journey%20to%20find%20out%205.jpg" alt="Journey to Find Out screenshot 5" style="display:none">
+                    </div>
                     <div class="project-header">
                         <h3>Unity Games Portfolio</h3>
                         <span class="project-status completed">Released</span>
@@ -547,7 +629,7 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p>&copy; 2025 Thomas Le. All rights reserved.</p>
+            <p>&copy; 2026 Thomas Le. All rights reserved.</p>
             <div class="footer-links">
                 <a href="mailto:lttcyborg@gmail.com">Email</a>
                 <a href="https://linkedin.com/in/altterisk" target="_blank">LinkedIn</a>
@@ -556,6 +638,15 @@
             </div>
         </div>
     </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+        <button class="lightbox-close" id="lightbox-close" aria-label="Close image">&times;</button>
+        <button class="lightbox-prev" id="lightbox-prev" aria-label="Previous image">&#8249;</button>
+        <img class="lightbox-img" id="lightbox-img" src="" alt="">
+        <button class="lightbox-next" id="lightbox-next" aria-label="Next image">&#8250;</button>
+        <div class="lightbox-counter" id="lightbox-counter"></div>
+    </div>
 
     <script src="script.js"></script>
 </body>
