@@ -16,6 +16,13 @@
     --accent: #3b82f6;
     --success: #10b981;
     --warning: #f59e0b;
+    --nav-height: 70px;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+    scroll-padding-top: var(--nav-height);
 }
 
 body {
@@ -23,6 +30,23 @@ body {
     background: var(--bg);
     color: var(--text);
     line-height: 1.6;
+}
+
+/* Reduced motion: disable snapping, smooth scroll, and scroll-driven/CSS animations */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+        scroll-snap-type: none;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }
 
 .container {
@@ -37,6 +61,13 @@ header {
     padding: 80px 0;
     text-align: center;
     border-bottom: 2px solid var(--primary);
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    scroll-snap-align: start;
+    overflow: hidden;
 }
 
 .profile-section {
@@ -44,6 +75,23 @@ header {
     flex-direction: column;
     align-items: center;
     gap: 20px;
+}
+
+/* Hero parallax. Every layer drifts UPWARD, and the drift rate DECREASES down the
+   stack (avatar fastest, contact links slowest). Because each element always moves
+   up at least as fast as the one below it, the vertical gap between any two layers
+   can only grow as you scroll — they can never collide. (The reverse — pushing
+   layers down at increasing rates — is what made the subtitle land on top of the
+   contact buttons.) */
+.avatar,
+h1,
+.subtitle,
+.contact-links {
+    will-change: transform;
+}
+
+.profile-section {
+    opacity: var(--hero-opacity, 1);
 }
 
 .avatar {
@@ -54,10 +102,11 @@ header {
     border: 4px solid var(--primary);
     box-shadow: 0 8px 24px rgba(37, 99, 235, 0.3);
     transition: transform 0.3s ease;
+    transform: translateY(var(--py-avatar, 0px));
 }
 
 .avatar:hover {
-    transform: scale(1.05);
+    transform: translateY(var(--py-avatar, 0px)) scale(1.05);
 }
 
 h1 {
@@ -67,12 +116,14 @@ h1 {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    transform: translateY(var(--py-title, 0px));
 }
 
 .subtitle {
     font-size: 1.5rem;
     color: var(--text-muted);
     margin-bottom: 20px;
+    transform: translateY(var(--py-subtitle, 0px));
 }
 
 .contact-links {
@@ -80,6 +131,7 @@ h1 {
     gap: 20px;
     flex-wrap: wrap;
     justify-content: center;
+    transform: translateY(var(--py-contact, 0px));
 }
 
 .contact-links a {
@@ -98,17 +150,18 @@ h1 {
     border-color: var(--primary);
 }
 
-/* Navigation */
-nav {
+/* Navigation (top sticky nav — scoped to .site-nav so it doesn't collide with
+   the fixed .dot-nav, which is also a <nav> element) */
+.site-nav {
     background: var(--bg-card);
     padding: 20px 0;
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 900;
     border-bottom: 1px solid var(--secondary);
 }
 
-nav ul {
+.site-nav ul {
     display: flex;
     justify-content: center;
     gap: 30px;
@@ -116,7 +169,7 @@ nav ul {
     flex-wrap: wrap;
 }
 
-nav a {
+.site-nav a {
     color: var(--text-muted);
     text-decoration: none;
     font-weight: 500;
@@ -124,8 +177,103 @@ nav a {
     padding: 5px 10px;
 }
 
-nav a:hover {
+.site-nav a:hover {
     color: var(--primary);
+}
+
+.site-nav a.active-link {
+    color: var(--primary);
+}
+
+/* Scroll progress bar */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    width: 0%;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    z-index: 2000;
+    transition: width 0.1s linear;
+}
+
+/* Dot navigation */
+.dot-nav {
+    position: fixed;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000;
+}
+
+.dot-nav ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.dot-nav a.dot-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    text-decoration: none;
+}
+
+.dot-nav .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: transparent;
+    border: 2px solid var(--secondary);
+    transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+    flex-shrink: 0;
+}
+
+/* Absolutely positioned so the (invisible) labels don't occupy layout width — in
+   flow, each label's differing length pushed its dot to a different x and the column
+   came out staggered instead of a straight vertical line. */
+.dot-nav .dot-label {
+    position: absolute;
+    right: 100%;
+    margin-right: 10px;
+    color: var(--text);
+    font-size: 0.85rem;
+    font-weight: 500;
+    white-space: nowrap;
+    background: var(--bg-card);
+    border: 1px solid var(--secondary);
+    padding: 4px 10px;
+    border-radius: 6px;
+    opacity: 0;
+    transform: translateX(6px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    pointer-events: none;
+}
+
+.dot-nav a.dot-link:hover .dot-label,
+.dot-nav a.dot-link:focus-visible .dot-label {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.dot-nav a.dot-link:hover .dot,
+.dot-nav a.dot-link:focus-visible .dot {
+    border-color: var(--primary);
+    transform: scale(1.2);
+}
+
+.dot-nav a.dot-link.active .dot {
+    background: var(--primary);
+    border-color: var(--primary);
+    transform: scale(1.15);
+}
+
+@media (max-width: 768px) {
+    .dot-nav {
+        display: none;
+    }
 }
 
 /* Sections */
@@ -135,6 +283,49 @@ nav a:hover {
 
 .section:nth-child(even) {
     background: rgba(30, 41, 59, 0.3);
+}
+
+/* Full-viewport snap panels. Every panel is exactly one viewport minus the sticky
+   nav, so `scroll-snap-type: y mandatory` on <html> always has a snap point to rest
+   at and each wheel gesture lands decisively on the next section. */
+.section.panel {
+    height: calc(100vh - var(--nav-height));
+    height: calc(100dvh - var(--nav-height));
+    display: flex;
+    align-items: center;
+    scroll-snap-align: start;
+    padding: 30px 0;
+}
+
+/* A definite panel height is what lets the projects carousel size itself, but it
+   also means content taller than the viewport would be clipped — and under mandatory
+   snapping, unreachable. So the panel body scrolls internally when it has to. In
+   practice the content fits and no scrollbar appears; when it doesn't (e.g. a laptop
+   with a short window), the overflow stays reachable and the scroll chains onward to
+   the next section once you hit the bottom. */
+.section.panel .container {
+    width: 100%;
+    max-height: 100%;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--secondary) transparent;
+}
+
+.section.panel .container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.section.panel .container::-webkit-scrollbar-thumb {
+    background: var(--secondary);
+    border-radius: 3px;
+}
+
+/* The footer is shorter than a viewport, so it gets an `end` snap alignment: the
+   snap position is "footer bottom flush with viewport bottom" (= document end).
+   Without this, mandatory snapping would keep yanking back to the last panel and
+   the footer would be unreachable. */
+footer {
+    scroll-snap-align: end;
 }
 
 .section-title {
@@ -401,24 +592,175 @@ nav a:hover {
     pointer-events: none;
 }
 
-/* Projects Grid — JS masonry */
-.projects-grid {
-    position: relative;
+/* ---------------------------------------------------------------------------
+   Projects: a one-viewport panel containing a horizontal snap carousel.
+   The section is a flex column (title / filters / carousel), so the carousel
+   viewport gets a definite height from `flex: 1` and never grows the page.
+   --------------------------------------------------------------------------- */
+#projects.panel {
+    align-items: stretch;
 }
 
+#projects .container {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+#projects .section-title {
+    margin-bottom: 30px;
+}
+
+#projects .filter-buttons {
+    margin-bottom: 25px;
+}
+
+.projects-viewport {
+    position: relative;
+    flex: 1;
+    min-height: 0;
+    display: flex;
+}
+
+/* The scroll track */
+.projects-grid {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: stretch;
+    gap: 24px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    padding: 4px 4px 14px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary) rgba(100, 116, 139, 0.2);
+}
+
+.projects-grid::-webkit-scrollbar {
+    height: 8px;
+}
+
+.projects-grid::-webkit-scrollbar-track {
+    background: rgba(100, 116, 139, 0.2);
+    border-radius: 4px;
+}
+
+.projects-grid::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 4px;
+}
+
+.projects-grid::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
+}
+
+/* Carousel arrows */
+.carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--bg-card);
+    color: var(--text);
+    border: 1px solid var(--secondary);
+    font-size: 1.6rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+    transition: background 0.25s ease, border-color 0.25s ease, opacity 0.25s ease;
+}
+
+.carousel-arrow:hover:not(:disabled) {
+    background: var(--primary);
+    border-color: var(--primary);
+}
+
+.carousel-arrow:disabled {
+    opacity: 0.25;
+    cursor: default;
+}
+
+.carousel-prev {
+    left: -14px;
+}
+
+.carousel-next {
+    right: -14px;
+}
+
+.carousel-hint {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-top: 10px;
+}
+
+/* Cards: fixed width, full track height, scrollable body so long feature lists
+   stay reachable without the section ever exceeding one viewport. */
 .project-card {
+    flex: 0 0 clamp(300px, 30%, 400px);
+    scroll-snap-align: start;
     background: var(--bg-card);
     border: 1px solid var(--secondary);
     border-radius: 12px;
     padding: 25px;
-    transition: all 0.3s ease;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
     gap: 15px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--secondary) transparent;
 }
 
+/* The card is a fixed-height flex column, so by default every child is allowed to
+   shrink to fit — which silently crushed the screenshot grid (its only intrinsic
+   height comes from the thumbs' aspect-ratio) down to nothing, and the project
+   images vanished. Nothing in the card shrinks; the card scrolls instead. */
+.project-card > * {
+    flex-shrink: 0;
+}
+
+.project-card::-webkit-scrollbar {
+    width: 8px;
+}
+
+.project-card::-webkit-scrollbar-track {
+    background: rgba(100, 116, 139, 0.15);
+    border-radius: 4px;
+}
+
+.project-card::-webkit-scrollbar-thumb {
+    background: var(--secondary);
+    border-radius: 4px;
+}
+
+.project-card::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+}
+
+/* Suppress the click that ends a drag, so panning the carousel never opens a link
+   or a lightbox by accident. */
+.projects-grid.dragging {
+    cursor: grabbing;
+    scroll-behavior: auto;
+}
+
+.projects-grid.dragging * {
+    pointer-events: none;
+}
+
+/* No translateY lift here: cards live in a scroll-snap track, and transforming
+   them would shift their snap boxes and fight the carousel's scroll position. */
 .project-card:hover {
-    transform: translateY(-5px);
     border-color: var(--primary);
     box-shadow: 0 10px 30px rgba(37, 99, 235, 0.2);
 }
@@ -750,18 +1092,162 @@ footer p {
     color: var(--primary);
 }
 
+/* Scroll-driven reveal animations (progressive enhancement).
+   When supported, this fully replaces the JS IntersectionObserver fallback —
+   script.js checks CSS.supports('animation-timeline', 'view()') and skips
+   attaching its own observer/inline styles in that case, to avoid double-animating.
+   Cards that already have a hover lift (transform) use an opacity-only reveal so the
+   scroll-linked animation's fill-mode value never fights the :hover transform. */
+/* animation-range completes on ENTRY, not on `cover`. Sections are snapped panels
+   now, so the scroll never travels far enough for a `cover`-based range to finish —
+   anything sitting low in a panel (e.g. the last skills card) would freeze part-way
+   through its fade and render permanently dimmed. Keying off `entry` means an element
+   is fully revealed as soon as it is fully on screen, which is always true at rest. */
+@supports (animation-timeline: view()) {
+    /* The ambient scene now owns section transitions. Child content must remain
+       rendered at its final state so it cannot lag behind a snapped panel. */
+    .section-title,
+    .timeline-item,
+    .skill-category,
+    .education-card {
+        animation: none;
+    }
+}
+
+/* Project cards are deliberately excluded from the scroll-driven reveal: they now
+   live inside a horizontal scroller, where a view() timeline resolves against the
+   carousel's (non-scrolling) block axis and would leave them stuck at opacity 0. */
+
+@keyframes reveal-up {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes reveal-fade {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* ---------------------------------------------------------------------------
+   Panel density. Sections are one viewport tall now, so the generous spacing of
+   the old free-scrolling layout has to tighten up — otherwise Skills/Experience
+   overflow a 900px-tall laptop screen and fall back to an internal scrollbar.
+   Placed after the base rules so these win on cascade order.
+   --------------------------------------------------------------------------- */
+.section.panel .section-title {
+    margin-bottom: 30px;
+}
+
+.section.panel .skills-grid {
+    gap: 20px;
+}
+
+.section.panel .skill-category {
+    padding: 18px;
+}
+
+.section.panel .skill-category h3 {
+    font-size: 1.15rem;
+    margin-bottom: 12px;
+}
+
+.section.panel .skill-tags {
+    gap: 8px;
+}
+
+.section.panel .skill-tag {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+}
+
+.section.panel .timeline-item {
+    margin-bottom: 24px;
+}
+
+.section.panel .timeline-content {
+    padding: 18px 20px;
+}
+
+.section.panel .timeline-content h3 {
+    font-size: 1.3rem;
+}
+
+.section.panel .timeline-content h4 {
+    margin-bottom: 10px;
+}
+
+.section.panel .timeline-content ul {
+    font-size: 0.95rem;
+}
+
+.section.panel .timeline-content li {
+    margin-bottom: 4px;
+}
+
+.section.panel .education-card {
+    padding: 22px;
+}
+
+/* Safety valve for viewports too small to hold a panel's content in one screen
+   (e.g. the 7-category skills grid stacked on a phone). Mandatory snapping there
+   would make the overflow unreachable, so fall back to proximity snapping and let
+   panels grow past the viewport. The projects carousel keeps its own fixed height
+   and is swiped natively instead of arrow-driven. */
+@media (max-width: 768px), (max-height: 700px) {
+    /* Snapping off entirely, not merely relaxed to `proximity`. Once panels are
+       content-height they can exceed the viewport, and a snap point at each section
+       top just drags a half-finished scroll backwards — you push down, the page
+       pulls back, and long sections become a fight to read. Plain scrolling is the
+       right behaviour at this size. */
+    html {
+        scroll-snap-type: none;
+    }
+
+    header,
+    .section.panel {
+        min-height: auto;
+        height: auto;
+        display: block;
+        padding: 70px 0;
+    }
+
+    /* Back to natural page flow: no fixed panel height means no internal panel
+       scrollbar — the document just gets longer, as it should on a phone. */
+    .section.panel .container {
+        max-height: none;
+        overflow-y: visible;
+    }
+
+    #projects.panel,
+    #projects .container,
+    .projects-viewport {
+        display: block;
+    }
+
+    .projects-grid {
+        height: 70vh;
+    }
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
-    /* Force single-column layout before JS masonry runs */
     .project-card {
-        position: static !important;
-        width: 100% !important;
-        left: auto !important;
-        top: auto !important;
-        margin-bottom: 30px;
+        flex: 0 0 85%;
     }
-    .projects-grid {
-        height: auto !important;
+
+    /* Touch devices swipe the carousel directly — no arrows needed */
+    .carousel-arrow {
+        display: none;
     }
 
     h1 {
@@ -798,7 +1284,7 @@ footer p {
         left: -20px;
     }
 
-    nav ul {
+    .site-nav ul {
         gap: 15px;
     }
 
@@ -840,5 +1326,673 @@ footer p {
     .education-grid,
     .skills-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+/* ========================================================================== */
+/* 2026 motion system: Living Systems                                         */
+/* ========================================================================== */
+
+:root {
+    --ink: #07100f;
+    --surface: rgba(10, 20, 20, 0.76);
+    --surface-strong: rgba(13, 27, 26, 0.92);
+    --line: rgba(190, 255, 239, 0.14);
+    --line-hot: rgba(99, 245, 210, 0.55);
+    --motion-accent: #63f5d2;
+    --motion-accent-rgb: 99, 245, 210;
+    --primary: #63f5d2;
+    --primary-dark: #31bfa2;
+    --accent: #86a8ff;
+    --bg: #07100f;
+    --bg-card: #0d1b1a;
+    --text: #edfdf8;
+    --text-muted: #91aaa3;
+}
+
+html {
+    background: var(--ink);
+}
+
+body {
+    position: relative;
+    isolation: isolate;
+    background:
+        radial-gradient(circle at 70% 20%, rgba(var(--motion-accent-rgb), 0.055), transparent 33rem),
+        linear-gradient(145deg, #06100f 0%, #081311 55%, #07100f 100%);
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
+    letter-spacing: -0.012em;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -3;
+    pointer-events: none;
+    opacity: 0.34;
+    background-image:
+        linear-gradient(rgba(164, 255, 232, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(164, 255, 232, 0.035) 1px, transparent 1px);
+    background-size: 64px 64px;
+    -webkit-mask-image: linear-gradient(to bottom, black, transparent 88%);
+    mask-image: linear-gradient(to bottom, black, transparent 88%);
+}
+
+.ambient-canvas {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0.88;
+    transition: filter 600ms ease, opacity 600ms ease;
+}
+
+.ambient-vignette {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+        linear-gradient(90deg, rgba(4, 10, 9, 0.78), transparent 34%, transparent 68%, rgba(4, 10, 9, 0.35)),
+        radial-gradient(ellipse at center, transparent 25%, rgba(3, 8, 7, 0.62) 100%);
+}
+
+.section-readout {
+    position: fixed;
+    left: max(24px, calc((100vw - 1200px) / 2));
+    bottom: 24px;
+    z-index: 850;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--text-muted);
+    font-family: Consolas, "SFMono-Regular", monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    pointer-events: none;
+}
+
+.section-readout-index {
+    color: var(--motion-accent);
+    transition: color 500ms ease;
+}
+
+.section-readout-line {
+    width: 42px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--motion-accent), transparent);
+}
+
+.section-readout-name {
+    min-width: 90px;
+}
+
+body[data-motion-section="about"] {
+    --motion-accent: #66cdff;
+    --motion-accent-rgb: 102, 205, 255;
+}
+
+body[data-motion-section="projects"] {
+    --motion-accent: #ffcf70;
+    --motion-accent-rgb: 255, 207, 112;
+}
+
+body[data-motion-section="skills"] {
+    --motion-accent: #9d7eff;
+    --motion-accent-rgb: 157, 126, 255;
+}
+
+body[data-motion-section="experience"] {
+    --motion-accent: #63f5d2;
+    --motion-accent-rgb: 99, 245, 210;
+}
+
+body[data-motion-section="education"] {
+    --motion-accent: #eff6ff;
+    --motion-accent-rgb: 239, 246, 255;
+}
+
+.scroll-progress {
+    height: 2px;
+    background: var(--motion-accent);
+    box-shadow: 0 0 14px rgba(var(--motion-accent-rgb), 0.8);
+}
+
+.site-nav {
+    padding: 12px 0;
+    background: rgba(5, 14, 13, 0.72);
+    border-bottom: 1px solid var(--line);
+    backdrop-filter: blur(18px) saturate(130%);
+}
+
+.site-nav ul {
+    gap: 4px;
+}
+
+.site-nav a {
+    position: relative;
+    padding: 8px 14px;
+    color: #829b94;
+    font-family: Consolas, "SFMono-Regular", monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.site-nav a::after {
+    content: "";
+    position: absolute;
+    left: 14px;
+    right: 14px;
+    bottom: 2px;
+    height: 1px;
+    background: var(--motion-accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 350ms cubic-bezier(.2, .8, .2, 1);
+}
+
+.site-nav a.active-link,
+.site-nav a:hover {
+    color: var(--text);
+}
+
+.site-nav a.active-link::after {
+    transform: scaleX(1);
+}
+
+.dot-nav {
+    right: 28px;
+}
+
+.dot-nav ul {
+    gap: 22px;
+}
+
+.dot-nav .dot {
+    width: 7px;
+    height: 7px;
+    border: 1px solid rgba(195, 235, 224, 0.42);
+    border-radius: 1px;
+    transform: rotate(45deg);
+}
+
+.dot-nav a.dot-link.active .dot {
+    background: var(--motion-accent);
+    border-color: var(--motion-accent);
+    box-shadow: 0 0 14px rgba(var(--motion-accent-rgb), 0.7);
+    transform: rotate(45deg) scale(1.35);
+}
+
+.dot-nav .dot-label {
+    background: rgba(7, 16, 15, 0.9);
+    border-color: var(--line);
+    border-radius: 2px;
+    font-family: Consolas, "SFMono-Regular", monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+header,
+.section {
+    position: relative;
+    background: transparent !important;
+    border: 0;
+}
+
+header::after,
+.section::after {
+    content: "";
+    position: absolute;
+    inset: 9% 3%;
+    z-index: -1;
+    opacity: 0;
+    pointer-events: none;
+    border: 1px solid rgba(var(--motion-accent-rgb), 0.08);
+    background: linear-gradient(135deg, rgba(var(--motion-accent-rgb), 0.035), transparent 45%);
+    clip-path: polygon(0 0, 22% 0, 22% 1px, 100% 1px, 100% 100%, 76% 100%, 76% calc(100% - 1px), 0 calc(100% - 1px));
+    transition: opacity 600ms ease, inset 800ms cubic-bezier(.16, 1, .3, 1);
+}
+
+header.is-motion-active::after,
+.section.is-motion-active::after {
+    inset: 7% 2%;
+    opacity: 1;
+}
+
+header .container,
+.section > .container,
+footer .container {
+    position: relative;
+    z-index: 2;
+}
+
+header .container {
+    width: 100%;
+}
+
+.profile-section {
+    max-width: 820px;
+    align-items: flex-start;
+    gap: 14px;
+    text-align: left;
+}
+
+.avatar {
+    width: 104px;
+    height: 104px;
+    margin-bottom: 18px;
+    border: 1px solid rgba(var(--motion-accent-rgb), 0.65);
+    border-radius: 50%;
+    filter: saturate(0.82) contrast(1.06);
+    box-shadow: 0 0 0 7px rgba(var(--motion-accent-rgb), 0.045), 0 20px 70px rgba(0, 0, 0, 0.45);
+}
+
+h1 {
+    margin: 0;
+    max-width: 760px;
+    font-size: clamp(4.2rem, 9vw, 8.5rem);
+    line-height: 0.82;
+    letter-spacing: -0.075em;
+    background: linear-gradient(120deg, #ffffff 8%, #b7fff0 48%, #84a89f 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+.subtitle {
+    max-width: 650px;
+    margin: 12px 0 22px;
+    color: #a4beb6;
+    font-family: Consolas, "SFMono-Regular", monospace;
+    font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+    letter-spacing: 0.04em;
+}
+
+.subtitle::before {
+    content: "// ";
+    color: var(--motion-accent);
+}
+
+.contact-links {
+    justify-content: flex-start;
+    gap: 8px;
+}
+
+.contact-links a,
+.btn-primary,
+.btn-secondary {
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: rgba(8, 19, 17, 0.68);
+    color: #dffaf3;
+    font-family: Consolas, "SFMono-Regular", monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    backdrop-filter: blur(10px);
+}
+
+.contact-links a:hover,
+.btn-primary:hover,
+.btn-secondary:hover {
+    color: #06110e;
+    background: var(--motion-accent);
+    border-color: var(--motion-accent);
+    box-shadow: 0 0 30px rgba(var(--motion-accent-rgb), 0.18);
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 34px;
+    color: var(--text);
+    font-size: clamp(2.3rem, 5vw, 4.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.055em;
+}
+
+.section-title::before {
+    color: var(--motion-accent);
+    font-family: Consolas, "SFMono-Regular", monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.13em;
+}
+
+#about .section-title::before { content: "02 / SIGNAL"; }
+#projects .section-title::before { content: "03 / SYSTEMS"; }
+#skills .section-title::before { content: "04 / CONSTELLATION"; }
+#experience .section-title::before { content: "05 / TRAJECTORY"; }
+#education .section-title::before { content: "06 / RESOLVE"; }
+
+.section-title::after {
+    width: min(120px, 14vw);
+    height: 1px;
+    margin: 0;
+    background: linear-gradient(90deg, var(--motion-accent), transparent);
+}
+
+.about-content {
+    max-width: 860px;
+    padding: clamp(24px, 4vw, 50px);
+    border: 1px solid var(--line);
+    border-left: 2px solid var(--motion-accent);
+    border-radius: 2px;
+    background: linear-gradient(100deg, rgba(10, 24, 23, 0.88), rgba(8, 18, 18, 0.55));
+    box-shadow: 0 25px 90px rgba(0, 0, 0, 0.24);
+    backdrop-filter: blur(16px);
+}
+
+.about-content p {
+    color: #bdd0ca;
+    font-size: clamp(0.95rem, 1.5vw, 1.08rem);
+    line-height: 1.78;
+}
+
+.filter-buttons {
+    gap: 7px;
+}
+
+.filter-btn {
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: rgba(8, 18, 17, 0.7);
+    color: #8fa9a2;
+    font-family: Consolas, "SFMono-Regular", monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    color: #08100e;
+    background: var(--motion-accent);
+    border-color: var(--motion-accent);
+}
+
+.projects-viewport,
+.projects-grid {
+    border-radius: 2px;
+}
+
+.project-card,
+.skill-category,
+.timeline-content,
+.education-card {
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: linear-gradient(145deg, rgba(14, 29, 28, 0.92), rgba(8, 18, 17, 0.8));
+    box-shadow: 0 20px 65px rgba(0, 0, 0, 0.22);
+    backdrop-filter: blur(15px);
+}
+
+.project-card {
+    position: relative;
+    border-top-color: rgba(var(--motion-accent-rgb), 0.65);
+}
+
+.project-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(105deg, transparent 30%, rgba(var(--motion-accent-rgb), 0.055) 49%, transparent 68%);
+    transform: translateX(-120%);
+}
+
+#projects.is-motion-active .project-card::after {
+    animation: systems-scan 7s ease-in-out infinite 1.2s;
+}
+
+@keyframes systems-scan {
+    0%, 68% { transform: translateX(-120%); }
+    88%, 100% { transform: translateX(120%); }
+}
+
+.project-card:hover,
+.skill-category:hover,
+.timeline-content:hover,
+.education-card:hover {
+    border-color: rgba(var(--motion-accent-rgb), 0.5);
+    box-shadow: 0 22px 75px rgba(0, 0, 0, 0.3), 0 0 28px rgba(var(--motion-accent-rgb), 0.06);
+}
+
+.project-screenshot,
+.screenshot-thumb,
+.screenshot-more {
+    border-radius: 1px;
+}
+
+.tech-tag,
+.skill-tag,
+.project-status {
+    border-radius: 1px;
+    border: 1px solid rgba(var(--motion-accent-rgb), 0.18);
+    background: rgba(var(--motion-accent-rgb), 0.07);
+    color: #bce9dd;
+    font-family: Consolas, "SFMono-Regular", monospace;
+    font-size: 0.68rem;
+}
+
+.carousel-arrow {
+    border-color: var(--line);
+    background: rgba(6, 15, 14, 0.86);
+    color: var(--motion-accent);
+    border-radius: 2px;
+}
+
+.carousel-hint {
+    color: #728b84;
+    font-family: Consolas, "SFMono-Regular", monospace;
+    font-size: 0.66rem;
+    letter-spacing: 0.04em;
+}
+
+.skills-grid {
+    gap: 12px;
+}
+
+.skill-category {
+    position: relative;
+    overflow: hidden;
+}
+
+.skill-category::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 34%;
+    height: 1px;
+    background: linear-gradient(90deg, var(--motion-accent), transparent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 600ms cubic-bezier(.16, 1, .3, 1);
+}
+
+#skills.is-motion-active .skill-category::before {
+    transform: scaleX(1);
+}
+
+.skill-category h3,
+.project-card h3,
+.timeline-content h3,
+.education-card h3 {
+    color: #eefcf8;
+    letter-spacing: -0.025em;
+}
+
+.timeline::before {
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--motion-accent) 20%, rgba(var(--motion-accent-rgb), 0.14) 84%, transparent);
+}
+
+.timeline-item::before {
+    box-shadow: 0 0 0 5px rgba(var(--motion-accent-rgb), 0.07), 0 0 18px rgba(var(--motion-accent-rgb), 0.5);
+}
+
+#experience.is-motion-active .timeline::after {
+    content: "";
+    position: absolute;
+    left: 19px;
+    top: 0;
+    width: 3px;
+    height: 38px;
+    border-radius: 99px;
+    background: var(--motion-accent);
+    box-shadow: 0 0 22px var(--motion-accent);
+    animation: timeline-pulse 4.8s ease-in-out infinite;
+}
+
+@keyframes timeline-pulse {
+    0%, 10% { transform: translateY(0); opacity: 0; }
+    22% { opacity: 1; }
+    75% { opacity: 0.7; }
+    88%, 100% { transform: translateY(430px); opacity: 0; }
+}
+
+.timeline-date,
+.education-card .date {
+    color: var(--motion-accent);
+    font-family: Consolas, "SFMono-Regular", monospace;
+    letter-spacing: 0.03em;
+}
+
+.education-card {
+    overflow: hidden;
+}
+
+.education-card::after {
+    content: "";
+    position: absolute;
+    right: -35px;
+    bottom: -35px;
+    width: 110px;
+    height: 110px;
+    border: 1px solid rgba(var(--motion-accent-rgb), 0.12);
+    border-radius: 50%;
+    box-shadow: 0 0 0 16px rgba(var(--motion-accent-rgb), 0.025), 0 0 0 34px rgba(var(--motion-accent-rgb), 0.015);
+}
+
+#education.is-motion-active .education-card::after {
+    animation: resolve-orbit 12s linear infinite;
+}
+
+@keyframes resolve-orbit {
+    to { transform: rotate(360deg); }
+}
+
+footer {
+    position: relative;
+    background: rgba(5, 13, 12, 0.88);
+    border-top: 1px solid var(--line);
+}
+
+/* Content remains fully laid out during navigation. Moving a container that also
+   owns overflow creates a temporary overflow region and a flashing scrollbar, so
+   the ambient scene and readout carry the transition instead. */
+@media (prefers-reduced-motion: no-preference) {
+    .section > .container,
+    header > .container {
+        opacity: 1;
+        transform: none;
+        filter: none;
+    }
+
+    .section.is-motion-after > .container,
+    .section.is-motion-before > .container {
+        opacity: 1;
+        transform: none;
+        filter: blur(0);
+    }
+
+    body.section-transitioning .ambient-canvas {
+        filter: saturate(1.25) brightness(1.12);
+    }
+
+    body[data-motion-direction="forward"].section-transitioning .section-readout-line {
+        animation: readout-forward 650ms cubic-bezier(.16, 1, .3, 1);
+    }
+
+    body[data-motion-direction="backward"].section-transitioning .section-readout-line {
+        animation: readout-backward 650ms cubic-bezier(.16, 1, .3, 1);
+    }
+}
+
+@keyframes readout-forward {
+    0% { transform: scaleX(0); transform-origin: left; }
+    100% { transform: scaleX(1); transform-origin: left; }
+}
+
+@keyframes readout-backward {
+    0% { transform: scaleX(0); transform-origin: right; }
+    100% { transform: scaleX(1); transform-origin: right; }
+}
+
+@media (max-width: 768px), (max-height: 700px) {
+    .section-readout {
+        display: none;
+    }
+
+    .ambient-canvas {
+        opacity: 0.52;
+    }
+
+    header::after,
+    .section::after {
+        inset: 4% 10px;
+    }
+
+    .profile-section {
+        align-items: center;
+        text-align: center;
+    }
+
+    .contact-links {
+        justify-content: center;
+    }
+
+    h1 {
+        font-size: clamp(3.5rem, 20vw, 6rem);
+    }
+
+    .section-title {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 7px;
+        font-size: clamp(2.4rem, 12vw, 4rem);
+    }
+
+    .section-title::after {
+        width: 80px;
+    }
+
+    .about-content {
+        padding: 22px;
+    }
+
+    .section.is-motion-after > .container,
+    .section.is-motion-before > .container {
+        opacity: 1;
+        transform: none;
+        filter: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ambient-canvas {
+        opacity: 0.38;
+    }
+
+    #projects.is-motion-active .project-card::after,
+    #experience.is-motion-active .timeline::after,
+    #education.is-motion-active .education-card::after {
+        animation: none !important;
     }
 }

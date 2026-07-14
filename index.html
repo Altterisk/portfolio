@@ -7,26 +7,47 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <canvas class="ambient-canvas" id="ambientCanvas" aria-hidden="true"></canvas>
+    <div class="ambient-vignette" aria-hidden="true"></div>
+    <div class="section-readout" aria-hidden="true">
+        <span class="section-readout-index">01</span>
+        <span class="section-readout-line"></span>
+        <span class="section-readout-name">Origin</span>
+    </div>
+    <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+    <!-- Dot Navigation -->
+    <nav class="dot-nav" aria-label="Section quick navigation">
+        <ul>
+            <li><a href="#home" class="dot-link" data-section="home"><span class="dot"></span><span class="dot-label">Home</span></a></li>
+            <li><a href="#about" class="dot-link" data-section="about"><span class="dot"></span><span class="dot-label">About</span></a></li>
+            <li><a href="#projects" class="dot-link" data-section="projects"><span class="dot"></span><span class="dot-label">Projects</span></a></li>
+            <li><a href="#skills" class="dot-link" data-section="skills"><span class="dot"></span><span class="dot-label">Skills</span></a></li>
+            <li><a href="#experience" class="dot-link" data-section="experience"><span class="dot"></span><span class="dot-label">Experience</span></a></li>
+            <li><a href="#education" class="dot-link" data-section="education"><span class="dot"></span><span class="dot-label">Education</span></a></li>
+        </ul>
+    </nav>
+
     <!-- Header -->
-    <header>
+    <header id="home">
         <div class="container">
             <div class="profile-section">
                 <img src="public/img/avatar.jpeg" alt="Thomas Le" class="avatar">
                 <h1>Thomas Le</h1>
                 <p class="subtitle">Full Stack Developer | AI Engineer | Game Developer</p>
                 <div class="contact-links">
-                    <a href="mailto:lttcyborg@gmail.com">📧 Email</a>
-                    <a href="https://linkedin.com/in/altterisk" target="_blank">💼 LinkedIn</a>
-                    <a href="https://github.com/anyabot" target="_blank">🔗 GitHub 1</a>
-                    <a href="https://github.com/Altterisk" target="_blank">🔗 GitHub 2</a>
-                    <a href="tel:+61480606729">📱 +61 480 606 729</a>
+                    <a href="mailto:lttcyborg@gmail.com">Email</a>
+                    <a href="https://linkedin.com/in/altterisk" target="_blank">LinkedIn</a>
+                    <a href="https://github.com/anyabot" target="_blank">GitHub 1</a>
+                    <a href="https://github.com/Altterisk" target="_blank">GitHub 2</a>
+                    <a href="tel:+61480606729">+61 480 606 729</a>
                 </div>
             </div>
         </div>
     </header>
 
     <!-- Navigation -->
-    <nav>
+    <nav class="site-nav">
         <div class="container">
             <ul>
                 <li><a href="#about">About</a></li>
@@ -39,18 +60,18 @@
     </nav>
 
     <!-- About Section -->
-    <section id="about" class="section">
+    <section id="about" class="section panel">
         <div class="container">
             <h2 class="section-title">About Me</h2>
             <div class="about-content">
-                <p>Master of Information Technology student at Queensland University of Technology (specialising in AI), graduating June 2026. Currently seeking full-time opportunities in software development and IT roles within the Greater Brisbane Area.</p>
+                <p>Master of Artificial Intelligence graduate from Queensland University of Technology (GPA 6.813/7, completed July 2026). Seeking full-time opportunities in software development and AI/ML roles within the Greater Brisbane Area.</p>
                 <p>Full-stack developer with experience across AI engineering, backend systems, web development, and game development. Recent work includes building LLM-powered agentic pipelines with LangChain and Ollama, NLP document classifiers combining BERT embeddings and ensemble models, real-time collaborative platforms with Django and WebSockets, and React/Next.js frontends deployed on cloud infrastructure. Previously shipped cross-platform mobile games at VRillar and developed high-accuracy OCR systems at EyeQ Tech.</p>
             </div>
         </div>
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="section">
+    <section id="projects" class="section panel">
         <div class="container">
             <h2 class="section-title">Projects</h2>
             
@@ -63,7 +84,9 @@
                 <button class="filter-btn" data-filter="ai">AI/ML</button>
             </div>
 
-            <div class="projects-grid">
+            <div class="projects-viewport">
+                <button class="carousel-arrow carousel-prev" id="carouselPrev" aria-label="Previous project" aria-controls="projectsTrack">&#8249;</button>
+                <div class="projects-grid" id="projectsTrack" tabindex="0" role="region" aria-label="Projects carousel">
                 <!-- MineManager -->
                 <div class="project-card" data-category="group web ai">
                     <div class="project-screenshot">
@@ -77,9 +100,9 @@
                     </div>
                     <div class="project-header">
                         <h3>MineManager</h3>
-                        <span class="project-status">Ongoing</span>
+                        <span class="project-status completed">Completed</span>
                     </div>
-                    <p class="project-description">Full-stack enterprise platform for mining project management and document intelligence, built as a group capstone project (QUT INN700, 2026).</p>
+                    <p class="project-description">Full-stack enterprise platform for mining project management and document intelligence, built as a university-industry capstone with OreFox AI Limited (QUT Industry Project, 2025-2026).</p>
                     <div class="project-details">
                         <h4>Key Features:</h4>
                         <ul>
@@ -110,6 +133,84 @@
                         <span class="tech-tag">Tailwind CSS</span>
                         <span class="tech-tag">Plotly</span>
                         <span class="tech-tag">SQLite</span>
+                    </div>
+                </div>
+
+                <!-- Last Origin Map (LOMAPR) -->
+                <div class="project-card" data-category="personal web">
+                    <div class="project-screenshot">
+                        <img src="public/img/Enemy%20Info%20Site%20-%20Unit%20Skills.png" alt="Last Origin Map unit detail with skills tab">
+                        <img src="public/img/Enemy%20Info%20Site%20-%20Unit%20Gallery.png" alt="Last Origin Map unit story/CG gallery" style="display:none">
+                        <img src="public/img/Enemy%20Info%20Site%20-%20Enemy%20Detail.png" alt="Last Origin Map enemy detail modal" style="display:none">
+                        <img src="public/img/Enemy%20Info%20Site%20-%20Stage%20Restrictions.png" alt="Last Origin Map Sanctum of Alteration floor restrictions" style="display:none">
+                    </div>
+                    <div class="project-header">
+                        <h3>Last Origin Map (LOMAPR)</h3>
+                        <span class="project-status completed">Live</span>
+                    </div>
+                    <p class="project-description">Community database and reference site for the mobile game <em>Last Origin</em> — a static-export Next.js SPA covering units, equipment, world stages, Sanctum of Alteration, Infinite War, and a gacha simulator, with all game data fetched at runtime from a Cloudflare R2 bucket (no backend, no redeploys for data updates).</p>
+                    <div class="project-details">
+                        <h4>Features:</h4>
+                        <ul>
+                            <li>Unit browser with stats calculator, skills, profile, drop locations, promotion, limit break, and exclusive equipment per unit</li>
+                            <li>Enemy and equipment browsers with shareable, deep-linked modals showing stats, skills, and dagre-rendered AI behaviour graphs</li>
+                            <li>World/stage browser (chapters &rarr; zones &rarr; stages &rarr; waves/rewards/missions) and a Sanctum of Alteration floor planner (suitability/prohibition restrictions, resource gain)</li>
+                            <li>Skin viewer built on PixiJS/Spine (brotli-decompressed archives) plus a Unity WebGL viewer for fully skinned models</li>
+                            <li>Gacha simulator with pull-cost tracking and reactive community-translation layers</li>
+                            <li>Region switching (Global/KR) with automatic KR&rarr;Global data fallback</li>
+                        </ul>
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Next.js</span>
+                        <span class="tech-tag">TypeScript</span>
+                        <span class="tech-tag">Chakra UI</span>
+                        <span class="tech-tag">Redux Toolkit</span>
+                        <span class="tech-tag">PixiJS</span>
+                        <span class="tech-tag">Unity WebGL</span>
+                        <span class="tech-tag">Cloudflare Workers</span>
+                        <span class="tech-tag">Cloudflare R2</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://lo.altterisk.cc/" target="_blank" class="btn-primary">View Live Site</a>
+                        <a href="https://github.com/anyabot/LOMapR" target="_blank" class="btn-secondary">View Source</a>
+                    </div>
+                </div>
+
+                <!-- Aigis Tools -->
+                <div class="project-card" data-category="personal web ai">
+                    <div class="project-screenshot">
+                        <img src="public/img/Aigis%20Tools%20-%20Stage%20Enemies.png" alt="Aigis Tools stage enemy data">
+                        <img src="public/img/Aigis%20Tools%20-%20Stage%20Dialogue.png" alt="Aigis Tools stage overview and dialogue" style="display:none">
+                        <img src="public/img/Aigis%20Tools%20-%20Unit%20Detail.png" alt="Aigis Tools unit detail page" style="display:none">
+                        <img src="public/img/Aigis%20Tools%20-%20Buff%20Ranking.png" alt="Aigis Tools buff ranking table" style="display:none">
+                        <img src="public/img/Aigis%20Tools%20-%20Cost%20Generator.png" alt="Aigis Tools cost generation simulator" style="display:none">
+                    </div>
+                    <div class="project-header">
+                        <h3>Aigis Tools</h3>
+                        <span class="project-status completed">Live</span>
+                    </div>
+                    <p class="project-description">Data-extraction toolchain and interactive viewer site for the mobile game <em>Millennium War Aigis</em>, turning undocumented binary game assets into a browsable stats and sprite database.</p>
+                    <div class="project-details">
+                        <h4>Highlights:</h4>
+                        <ul>
+                            <li>Reverse-engineered bespoke binary formats (ALL4/ALLZ compression, ALTB/ALRD/ALAR stat tables, ALTX/ALIG sprite atlases) with a custom Python decoder</li>
+                            <li>Python pipeline reads the game CDN, decodes assets, and exports structured JSON + images with a one-command update workflow</li>
+                            <li>React (Vite) site with enemy/stage/unit browsing, tag pages, and a unit cost/generation simulator</li>
+                            <li>Handles multi-region data and machine-translated localisation of skill/ability descriptions</li>
+                        </ul>
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Binary Parsing</span>
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">TypeScript</span>
+                        <span class="tech-tag">Vite</span>
+                        <span class="tech-tag">Pillow</span>
+                        <span class="tech-tag">GitHub Pages</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://aigis.altterisk.cc/" target="_blank" class="btn-primary">View Live Site</a>
+                        <a href="https://github.com/Altterisk/Aigis-Enemy" target="_blank" class="btn-secondary">View Source</a>
                     </div>
                 </div>
 
@@ -235,12 +336,15 @@
                     <div class="project-details">
                         <h4>Features:</h4>
                         <ul>
-                            <li>Smooth scroll navigation with active highlighting</li>
-                            <li>Dynamic project filtering system</li>
-                            <li>Intersection Observer for scroll animations</li>
-                            <li>Scroll-to-top button with hover effects</li>
-                            <li>Fully responsive design across all devices</li>
-                            <li>Dark theme with modern gradient accents</li>
+                            <li>Full-viewport sections with mandatory CSS scroll snapping, so each scroll gesture lands decisively on the next section</li>
+                            <li>Nested horizontal snap carousel for projects — vertical wheel input is translated to horizontal movement, passing through at the edges so the page keeps flowing</li>
+                            <li>Fixed dot navigation synced to the active section via Intersection Observer, with hover labels and keyboard support</li>
+                            <li>Top progress bar reflecting page scroll position</li>
+                            <li>Scroll-driven reveal animations using CSS <code>animation-timeline: view()</code> with an Intersection Observer fallback</li>
+                            <li>Multi-layer parallax hero with monotonically diverging drift rates (layers can never collide)</li>
+                            <li>Keyboard navigation: Arrow/Page keys move between sections, &#8592;/&#8594; move between project cards</li>
+                            <li>Dynamic project filtering, lightbox image viewer, and a scroll-to-top button</li>
+                            <li>Fully responsive with <code>prefers-reduced-motion</code> support and a proximity-snap fallback on short viewports</li>
                         </ul>
                     </div>
                     <div class="tech-stack">
@@ -251,7 +355,7 @@
                     </div>
                     <div class="project-links">
                         <a href="https://altterisk.github.io/portfolio" target="_blank" class="btn-primary">View Live Site</a>
-                        <a href="github.com/Altterisk/portfolio" target="_blank" class="btn-secondary">View Source</a>
+                        <a href="https://github.com/Altterisk/portfolio" target="_blank" class="btn-secondary">View Source</a>
                     </div>
                 </div>
 
@@ -289,38 +393,31 @@
                     </div>
                     <div class="project-links">
                         <a href="https://altterisk.github.io/re1999/pull-simulation/" target="_blank" class="btn-primary">Try Simulator</a>
-                        <a href="github.com/Altterisk/re1999/tree/main/pull-simulation" target="_blank" class="btn-secondary">View Source</a>
+                        <a href="https://github.com/Altterisk/re1999/tree/main/pull-simulation" target="_blank" class="btn-secondary">View Source</a>
                     </div>
                 </div>
 
-                <!-- Enemy Information Site -->
-                <div class="project-card" data-category="personal web">
+                <!-- LO Translation Project -->
+                <div class="project-card" data-category="personal">
                     <div class="project-header">
-                        <h3>Enemy Information Site</h3>
-                        <span class="project-status completed">Live</span>
+                        <h3>LO Translation Project</h3>
+                        <span class="project-status completed">Community</span>
                     </div>
-                    <p class="project-description">Responsive website for viewing multilingual enemy data with real-time updates and machine translation integration.</p>
+                    <p class="project-description">Community translation-correction toolchain and English patch for the game <em>Last Origin</em> (Global), improving thousands of machine-translated localisation entries.</p>
                     <div class="project-details">
                         <h4>Features:</h4>
                         <ul>
-                            <li>Real-time data updates from Firebase Realtime Database</li>
-                            <li>Machine translation integration for multilingual support</li>
-                            <li>State management with Redux for optimal performance</li>
-                            <li>Clean UI design with Chakra UI components</li>
-                            <li>Deployed on Vercel for fast global access</li>
+                            <li>Python + Tkinter GUI review editor for browsing and editing thousands of localisation entries with missing-entry navigation and search</li>
+                            <li>Corrections editor and rules engine that auto-fix recurring mistranslations across every file from a single rule</li>
+                            <li>Korean-asset fill for entries missing a translation, with per-region handling</li>
+                            <li>Distributes a community English patch and supports contributor pull requests</li>
                         </ul>
                     </div>
                     <div class="tech-stack">
-                        <span class="tech-tag">React</span>
-                        <span class="tech-tag">Next.js</span>
-                        <span class="tech-tag">TypeScript</span>
-                        <span class="tech-tag">Firebase</span>
-                        <span class="tech-tag">Redux</span>
-                        <span class="tech-tag">Chakra UI</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://lomap.vercel.app/" target="_blank" class="btn-primary">View Live Site</a>
-                        <a href="https://github.com/anyabot/LOMapR" target="_blank" class="btn-secondary">View Source</a>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Tkinter</span>
+                        <span class="tech-tag">Localization</span>
+                        <span class="tech-tag">JSON</span>
                     </div>
                 </div>
 
@@ -464,12 +561,15 @@
                         <a href="https://apkpure.com/coin-pusher-festival/com.vrillar.coinpusherfestival" target="_blank" class="btn-secondary">Group Game 1</a>
                     </div>
                 </div>
+                </div>
+                <button class="carousel-arrow carousel-next" id="carouselNext" aria-label="Next project" aria-controls="projectsTrack">&#8250;</button>
             </div>
+            <p class="carousel-hint">Scroll a card to read it &middot; keep scrolling (or drag, or use &#8592; / &#8594;) to move between projects &middot; scroll past the last card to continue down the page</p>
         </div>
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="section">
+    <section id="skills" class="section panel">
         <div class="container">
             <h2 class="section-title">Technical Skills</h2>
             <div class="skills-grid">
@@ -558,7 +658,7 @@
     </section>
 
     <!-- Experience Section -->
-    <section id="experience" class="section">
+    <section id="experience" class="section panel">
         <div class="container">
             <h2 class="section-title">Work Experience</h2>
             <div class="timeline">
@@ -597,15 +697,16 @@
     </section>
 
     <!-- Education Section -->
-    <section id="education" class="section">
+    <section id="education" class="section panel">
         <div class="container">
             <h2 class="section-title">Education</h2>
             <div class="education-grid">
                 <div class="education-card">
-                    <h3>Master of Information Technology</h3>
+                    <h3>Master of Artificial Intelligence</h3>
                     <h4>Queensland University of Technology</h4>
-                    <p class="date">Jul 2024 - Present</p>
-                    <p>Specializing in Artificial Intelligence</p>
+                    <p class="date">Jul 2024 - Jul 2026</p>
+                    <p>GPA: 6.813 / 7 (predominantly High Distinctions)</p>
+                    <p class="achievement">QUT Executive Deans' Commendation for Academic Excellence (2025)</p>
                 </div>
                 <div class="education-card">
                     <h3>Bachelor of Computer Science</h3>
@@ -617,9 +718,11 @@
                 <div class="education-card">
                     <h3>Academic Honors</h3>
                     <ul>
+                        <li>QUT Executive Deans' Commendation for Academic Excellence (2025)</li>
+                        <li>First Prize - Math Olympiad by Vietnam Mathematical Society (2018)</li>
                         <li>Third Prize - Vietnamese Math Olympiad (2017, 2018)</li>
                         <li>Third Prize - International Mathematics Tournament of the Towns (2017)</li>
-                        <li>First Prize - Math Olympiad by Vietnam Mathematical Society (2018)</li>
+                        <li>Full Undergraduate Scholarship - KAIST (2018)</li>
                     </ul>
                 </div>
             </div>
@@ -649,5 +752,6 @@
     </div>
 
     <script src="script.js"></script>
+    <script src="ambient-motion.js"></script>
 </body>
 </html>

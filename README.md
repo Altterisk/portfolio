@@ -8,7 +8,7 @@ A modern, responsive portfolio website showcasing my projects, skills, and exper
 
 ## About
 
-Master of Information Technology student at Queensland University of Technology, graduating June 2026. This portfolio highlights my work in web development, AI/ML, game development, and full-stack applications.
+Master of Artificial Intelligence graduate from Queensland University of Technology (GPA 6.813/7, completed July 2026). This portfolio highlights my work in web development, AI/ML, game development, data-extraction pipelines, and full-stack applications.
 
 ## Features
 
