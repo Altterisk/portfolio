@@ -136,10 +136,121 @@
                     </div>
                 </div>
 
+                <!-- Altterisk Games Hub -->
+                <div class="project-card" data-category="personal web">
+                    <div class="project-screenshot">
+                        <img src="public/img/Game%20Hub%20-%20Landing.png" alt="Altterisk Games hub landing page listing five game sites">
+                        <img src="public/img/MAD%20Viewer%20-%20Events%20and%20Stages.png" alt="MAD Viewer using the shared hub bar and theme">
+                        <img src="public/img/Oshiro%20Database%20-%20Units.png" alt="Oshiro Database using the shared filter and card components" style="display:none">
+                    </div>
+                    <div class="project-header">
+                        <h3>Altterisk Games Hub</h3>
+                        <span class="project-status completed">Live</span>
+                    </div>
+                    <p class="project-description">Shared shell and component library behind five fan-made game databases (Aigis, LOMapR, MAD Viewer, Oshiro and Taimanin RPGX), plus the hub landing page at hub.altterisk.cc. Each site keeps its own repo, data and deploy, and pins the package to a tag so updating one never forces a rebuild of another.</p>
+                    <div class="project-details">
+                        <h4>What's in it:</h4>
+                        <ul>
+                            <li>Top bar with game switcher, footer, design tokens with a per-game accent, a Chakra theme and plain-CSS components so both Chakra and non-Chakra sites share one look</li>
+                            <li>Binary share-code codec (varints, delta id lists, bitsets, checksums), byte-for-byte compatible with the codes each site already shipped</li>
+                            <li>JSON loader with request sharing, retries and region fallback; versioned localStorage with migrations; URL-backed tri-state filters and pagination</li>
+                            <li>Pixi/Spine viewer primitives, <code>.tar.br</code> asset archives, SEO meta and sitemap builders, event-phase timers</li>
+                            <li>Vitest suite with golden tests for every shared codec and loader</li>
+                        </ul>
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">TypeScript</span>
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">Chakra UI</span>
+                        <span class="tech-tag">Vite</span>
+                        <span class="tech-tag">Vitest</span>
+                        <span class="tech-tag">PixiJS / Spine</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://hub.altterisk.cc/" target="_blank" class="btn-primary">View Hub</a>
+                        <a href="https://github.com/Altterisk/game-hub" target="_blank" class="btn-secondary">View Source</a>
+                    </div>
+                </div>
+
+                <!-- MAD Viewer -->
+                <div class="project-card" data-category="personal web">
+                    <div class="project-screenshot">
+                        <img src="public/img/MAD%20Viewer%20-%20Events%20and%20Stages.png" alt="MAD Viewer events and stages with live event badges">
+                        <img src="public/img/MAD%20Viewer%20-%20Story.png" alt="MAD Viewer story reader index">
+                        <img src="public/img/MAD%20Viewer%20-%20Items.png" alt="MAD Viewer item list with held and needed counts" style="display:none">
+                        <img src="public/img/MAD%20Viewer%20-%20Effect%20Search.png" alt="MAD Viewer skill effect search" style="display:none">
+                    </div>
+                    <div class="project-header">
+                        <h3>MAD Viewer</h3>
+                        <span class="project-status completed">Live</span>
+                    </div>
+                    <p class="project-description">Data site and skin viewer for the mobile game <em>MAKE DRAMA: MAD</em>, built from data decoded straight from the game client: characters, story, events and stages, items, a farm planner and party builder, in English and Korean.</p>
+                    <div class="project-details">
+                        <h4>Features:</h4>
+                        <ul>
+                            <li>Live Spine skin viewer with animation, camera and audio controls, PNG/video export and share links</li>
+                            <li>Home page with running events and pickup banners, counting down in server or local time</li>
+                            <li>Story reader for main, event and side stories, with the game's text in its own languages</li>
+                            <li>Farm planner that turns held vs. needed materials into a stage plan, plus party codes and a skill-effect search</li>
+                            <li>Statically exported Next.js site built on the shared hub shell</li>
+                        </ul>
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Next.js</span>
+                        <span class="tech-tag">TypeScript</span>
+                        <span class="tech-tag">Chakra UI</span>
+                        <span class="tech-tag">PixiJS / Spine</span>
+                        <span class="tech-tag">i18n</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://mad.altterisk.cc/" target="_blank" class="btn-primary">View Live Site</a>
+                        <a href="https://github.com/anyabot/MAD-Viewer" target="_blank" class="btn-secondary">View Source</a>
+                    </div>
+                </div>
+
+                <!-- Oshiro Database -->
+                <div class="project-card" data-category="personal web">
+                    <div class="project-screenshot">
+                        <img src="public/img/Oshiro%20Database%20-%20Unit%20Detail.png" alt="Oshiro Database castle girl detail with decoded effects and stats">
+                        <img src="public/img/Oshiro%20Database%20-%20Buff%20Ranking.png" alt="Oshiro Database buff ranking">
+                        <img src="public/img/Oshiro%20Database%20-%20Stages.png" alt="Oshiro Database stage list" style="display:none">
+                        <img src="public/img/Oshiro%20Database%20-%20Units.png" alt="Oshiro Database unit list with filters" style="display:none">
+                    </div>
+                    <div class="project-header">
+                        <h3>Oshiro Database</h3>
+                        <span class="project-status completed">Live</span>
+                    </div>
+                    <p class="project-description">Database for <em>Shiro Project:RE</em> covering 1,100+ castle girls, built from locally exported game tables. Effect codes are turned into readable English sentences, and anything not yet decoded is shown as raw fields instead of being guessed.</p>
+                    <div class="project-details">
+                        <h4>Features:</h4>
+                        <ul>
+                            <li>Unit pages with stats, specialties, formation specialties and stratagems for each renovation tier</li>
+                            <li>Buff ranking: the same effect describer outputs structured stat changes, ranked by stat, source and receiver</li>
+                            <li>Stage pages rebuilt from map spawn scripts: enemies scaled by stage multipliers, spawn order, and toggleable deliberation modifiers</li>
+                            <li>Search, filters and page kept in the URL so back/forward and shared links restore the view</li>
+                        </ul>
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">TypeScript</span>
+                        <span class="tech-tag">Vite</span>
+                        <span class="tech-tag">React Router</span>
+                        <span class="tech-tag">Python</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://oshiro.altterisk.cc/" target="_blank" class="btn-primary">View Live Site</a>
+                        <a href="https://github.com/anyabot/Oshiro-Database" target="_blank" class="btn-secondary">View Source</a>
+                    </div>
+                </div>
+
                 <!-- Last Origin Map (LOMAPR) -->
                 <div class="project-card" data-category="personal web">
                     <div class="project-screenshot">
-                        <img src="public/img/Enemy%20Info%20Site%20-%20Unit%20Skills.png" alt="Last Origin Map unit detail with skills tab">
+                        <img src="public/img/LOMapR%20-%20Home.png" alt="LOMapR home page with current event">
+                        <img src="public/img/LOMapR%20-%20Units.png" alt="LOMapR unit list with filters">
+                        <img src="public/img/LOMapR%20-%20World.png" alt="LOMapR event world page with zones and sub stories" style="display:none">
+                        <img src="public/img/LOMapR%20-%20Equipment.png" alt="LOMapR equipment browser" style="display:none">
+                        <img src="public/img/Enemy%20Info%20Site%20-%20Unit%20Skills.png" alt="Last Origin Map unit detail with skills tab" style="display:none">
                         <img src="public/img/Enemy%20Info%20Site%20-%20Unit%20Gallery.png" alt="Last Origin Map unit story/CG gallery" style="display:none">
                         <img src="public/img/Enemy%20Info%20Site%20-%20Enemy%20Detail.png" alt="Last Origin Map enemy detail modal" style="display:none">
                         <img src="public/img/Enemy%20Info%20Site%20-%20Stage%20Restrictions.png" alt="Last Origin Map Sanctum of Alteration floor restrictions" style="display:none">
@@ -179,7 +290,11 @@
                 <!-- Aigis Tools -->
                 <div class="project-card" data-category="personal web ai">
                     <div class="project-screenshot">
-                        <img src="public/img/Aigis%20Tools%20-%20Stage%20Enemies.png" alt="Aigis Tools stage enemy data">
+                        <img src="public/img/Aigis%20Database%20-%20Units.png" alt="Aigis Database unit list">
+                        <img src="public/img/Aigis%20Database%20-%20Collection.png" alt="Aigis Database collection checker">
+                        <img src="public/img/Aigis%20Database%20-%20Stages.png" alt="Aigis Database running events and stage levels" style="display:none">
+                        <img src="public/img/Aigis%20Database%20-%20DPS.png" alt="Aigis Database DPS calculator" style="display:none">
+                        <img src="public/img/Aigis%20Tools%20-%20Stage%20Enemies.png" alt="Aigis Tools stage enemy data" style="display:none">
                         <img src="public/img/Aigis%20Tools%20-%20Stage%20Dialogue.png" alt="Aigis Tools stage overview and dialogue" style="display:none">
                         <img src="public/img/Aigis%20Tools%20-%20Unit%20Detail.png" alt="Aigis Tools unit detail page" style="display:none">
                         <img src="public/img/Aigis%20Tools%20-%20Buff%20Ranking.png" alt="Aigis Tools buff ranking table" style="display:none">
@@ -195,7 +310,9 @@
                         <ul>
                             <li>Reverse-engineered bespoke binary formats (ALL4/ALLZ compression, ALTB/ALRD/ALAR stat tables, ALTX/ALIG sprite atlases) with a custom Python decoder</li>
                             <li>Python pipeline reads the game CDN, decodes assets, and exports structured JSON + images with a one-command update workflow</li>
-                            <li>React (Vite) site with enemy/stage/unit browsing, tag pages, and a unit cost/generation simulator</li>
+                            <li>React (Vite) site with unit/enemy/stage browsing, a live "now running" event list, buff ranking, and a unit cost/generation simulator</li>
+                            <li>Collection checker with restore codes and import from in-game screenshots via image recognition</li>
+                            <li>DPS calculator that combines buffers, debuffs and deployment effects, with shareable links</li>
                             <li>Handles multi-region data and machine-translated localisation of skill/ability descriptions</li>
                         </ul>
                     </div>
