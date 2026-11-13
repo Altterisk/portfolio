@@ -3,10 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thomas Le - Full Stack Developer Portfolio</title>
+    <title>Thomas Le - Full Stack Developer &amp; AI Engineer Portfolio</title>
+    <meta name="description" content="Thomas Le, full-stack developer and AI engineer in Brisbane (Master of AI, QUT). Projects include LLM pipelines, NLP classifiers, Django and Next.js apps, and live game-data sites.">
+    <meta name="author" content="Thomas Le">
+    <meta name="theme-color" content="#06100f">
+    <link rel="canonical" href="https://altterisk.github.io/portfolio/">
+    <link rel="icon" type="image/png" href="public/favicon.png">
+    <link rel="apple-touch-icon" href="public/apple-touch-icon.png">
+
+    <meta property="og:type" content="profile">
+    <meta property="og:site_name" content="Thomas Le">
+    <meta property="og:title" content="Thomas Le - Full Stack Developer &amp; AI Engineer">
+    <meta property="og:description" content="Full-stack developer and AI engineer in Brisbane. Projects in LLM pipelines, NLP, Django, Next.js and live game-data sites.">
+    <meta property="og:url" content="https://altterisk.github.io/portfolio/">
+    <meta property="og:image" content="https://altterisk.github.io/portfolio/public/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Thomas Le - Full Stack Developer, AI Engineer, Game Developer">
+    <meta property="profile:first_name" content="Thomas">
+    <meta property="profile:last_name" content="Le">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Thomas Le - Full Stack Developer &amp; AI Engineer">
+    <meta name="twitter:description" content="Full-stack developer and AI engineer in Brisbane. Projects in LLM pipelines, NLP, Django, Next.js and live game-data sites.">
+    <meta name="twitter:image" content="https://altterisk.github.io/portfolio/public/og-image.jpg">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Thomas Le",
+        "url": "https://altterisk.github.io/portfolio/",
+        "image": "https://altterisk.github.io/portfolio/public/img/avatar.webp",
+        "jobTitle": "Full Stack Developer & AI Engineer",
+        "address": { "@type": "PostalAddress", "addressLocality": "Brisbane", "addressRegion": "QLD", "addressCountry": "AU" },
+        "alumniOf": { "@type": "CollegeOrUniversity", "name": "Queensland University of Technology" },
+        "knowsAbout": ["Full-stack development", "Artificial intelligence", "Natural language processing", "Django", "React", "Next.js", "TypeScript", "Python", "Unity"],
+        "sameAs": [
+            "https://linkedin.com/in/altterisk",
+            "https://github.com/Altterisk",
+            "https://github.com/anyabot",
+            "https://hub.altterisk.cc/"
+        ]
+    }
+    </script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <a class="skip-link" href="#main">Skip to content</a>
     <canvas class="ambient-canvas" id="ambientCanvas" aria-hidden="true"></canvas>
     <div class="ambient-vignette" aria-hidden="true"></div>
     <div class="section-readout" aria-hidden="true">
@@ -32,14 +75,14 @@
     <header id="home">
         <div class="container">
             <div class="profile-section">
-                <img src="public/img/avatar.jpeg" alt="Thomas Le" class="avatar">
+                <img src="public/img/avatar.webp" alt="Thomas Le" class="avatar" width="160" height="160">
                 <h1>Thomas Le</h1>
                 <p class="subtitle">Full Stack Developer | AI Engineer | Game Developer</p>
                 <div class="contact-links">
                     <a href="mailto:lttcyborg@gmail.com">Email</a>
-                    <a href="https://linkedin.com/in/altterisk" target="_blank">LinkedIn</a>
-                    <a href="https://github.com/anyabot" target="_blank">GitHub 1</a>
-                    <a href="https://github.com/Altterisk" target="_blank">GitHub 2</a>
+                    <a href="https://linkedin.com/in/altterisk" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                    <a href="https://github.com/anyabot" target="_blank" rel="noopener noreferrer">GitHub 1</a>
+                    <a href="https://github.com/Altterisk" target="_blank" rel="noopener noreferrer">GitHub 2</a>
                     <a href="tel:+61480606729">+61 480 606 729</a>
                 </div>
             </div>
@@ -47,7 +90,7 @@
     </header>
 
     <!-- Navigation -->
-    <nav class="site-nav">
+    <nav class="site-nav" aria-label="Main">
         <div class="container">
             <ul>
                 <li><a href="#about">About</a></li>
@@ -59,6 +102,7 @@
         </div>
     </nav>
 
+    <main id="main" tabindex="-1">
     <!-- About Section -->
     <section id="about" class="section panel">
         <div class="container">
@@ -90,13 +134,13 @@
                 <!-- MineManager -->
                 <div class="project-card" data-category="group web ai">
                     <div class="project-screenshot">
-                        <img src="public/img/MineManager%201.png" alt="MineManager screenshot 1">
-                        <img src="public/img/MineManager%202.png" alt="MineManager screenshot 2">
-                        <img src="public/img/MineManager%203.png" alt="MineManager screenshot 3" style="display:none">
-                        <img src="public/img/MineManager%204.png" alt="MineManager screenshot 4" style="display:none">
-                        <img src="public/img/MineManager%205.png" alt="MineManager screenshot 5" style="display:none">
-                        <img src="public/img/MineManager%20-%20Version%20History.png" alt="MineManager version history" style="display:none">
-                        <img src="public/img/MineManager%20-%20NLP%20Classifier.png" alt="MineManager NLP classifier" style="display:none">
+                        <img src="public/img/MineManager%201.webp" loading="lazy" decoding="async" alt="MineManager screenshot 1">
+                        <img src="public/img/MineManager%202.webp" loading="lazy" decoding="async" alt="MineManager screenshot 2">
+                        <img src="public/img/MineManager%203.webp" loading="lazy" decoding="async" alt="MineManager screenshot 3" style="display:none">
+                        <img src="public/img/MineManager%204.webp" loading="lazy" decoding="async" alt="MineManager screenshot 4" style="display:none">
+                        <img src="public/img/MineManager%205.webp" loading="lazy" decoding="async" alt="MineManager screenshot 5" style="display:none">
+                        <img src="public/img/MineManager%20-%20Version%20History.webp" loading="lazy" decoding="async" alt="MineManager version history" style="display:none">
+                        <img src="public/img/MineManager%20-%20NLP%20Classifier.webp" loading="lazy" decoding="async" alt="MineManager NLP classifier" style="display:none">
                     </div>
                     <div class="project-header">
                         <h3>MineManager</h3>
@@ -139,9 +183,9 @@
                 <!-- Altterisk Games Hub -->
                 <div class="project-card" data-category="personal web">
                     <div class="project-screenshot">
-                        <img src="public/img/Game%20Hub%20-%20Landing.png" alt="Altterisk Games hub landing page listing five game sites">
-                        <img src="public/img/MAD%20Viewer%20-%20Events%20and%20Stages.png" alt="MAD Viewer using the shared hub bar and theme">
-                        <img src="public/img/Oshiro%20Database%20-%20Units.png" alt="Oshiro Database using the shared filter and card components" style="display:none">
+                        <img src="public/img/Game%20Hub%20-%20Landing.webp" loading="lazy" decoding="async" alt="Altterisk Games hub landing page listing five game sites">
+                        <img src="public/img/MAD%20Viewer%20-%20Events%20and%20Stages.webp" loading="lazy" decoding="async" alt="MAD Viewer using the shared hub bar and theme">
+                        <img src="public/img/Oshiro%20Database%20-%20Units.webp" loading="lazy" decoding="async" alt="Oshiro Database using the shared filter and card components" style="display:none">
                     </div>
                     <div class="project-header">
                         <h3>Altterisk Games Hub</h3>
@@ -167,18 +211,18 @@
                         <span class="tech-tag">PixiJS / Spine</span>
                     </div>
                     <div class="project-links">
-                        <a href="https://hub.altterisk.cc/" target="_blank" class="btn-primary">View Hub</a>
-                        <a href="https://github.com/Altterisk/game-hub" target="_blank" class="btn-secondary">View Source</a>
+                        <a href="https://hub.altterisk.cc/" target="_blank" rel="noopener noreferrer" class="btn-primary">View Hub</a>
+                        <a href="https://github.com/Altterisk/game-hub" target="_blank" rel="noopener noreferrer" class="btn-secondary">View Source</a>
                     </div>
                 </div>
 
                 <!-- MAD Viewer -->
                 <div class="project-card" data-category="personal web">
                     <div class="project-screenshot">
-                        <img src="public/img/MAD%20Viewer%20-%20Events%20and%20Stages.png" alt="MAD Viewer events and stages with live event badges">
-                        <img src="public/img/MAD%20Viewer%20-%20Story.png" alt="MAD Viewer story reader index">
-                        <img src="public/img/MAD%20Viewer%20-%20Items.png" alt="MAD Viewer item list with held and needed counts" style="display:none">
-                        <img src="public/img/MAD%20Viewer%20-%20Effect%20Search.png" alt="MAD Viewer skill effect search" style="display:none">
+                        <img src="public/img/MAD%20Viewer%20-%20Events%20and%20Stages.webp" loading="lazy" decoding="async" alt="MAD Viewer events and stages with live event badges">
+                        <img src="public/img/MAD%20Viewer%20-%20Story.webp" loading="lazy" decoding="async" alt="MAD Viewer story reader index">
+                        <img src="public/img/MAD%20Viewer%20-%20Items.webp" loading="lazy" decoding="async" alt="MAD Viewer item list with held and needed counts" style="display:none">
+                        <img src="public/img/MAD%20Viewer%20-%20Effect%20Search.webp" loading="lazy" decoding="async" alt="MAD Viewer skill effect search" style="display:none">
                     </div>
                     <div class="project-header">
                         <h3>MAD Viewer</h3>
@@ -203,18 +247,18 @@
                         <span class="tech-tag">i18n</span>
                     </div>
                     <div class="project-links">
-                        <a href="https://mad.altterisk.cc/" target="_blank" class="btn-primary">View Live Site</a>
-                        <a href="https://github.com/anyabot/MAD-Viewer" target="_blank" class="btn-secondary">View Source</a>
+                        <a href="https://mad.altterisk.cc/" target="_blank" rel="noopener noreferrer" class="btn-primary">View Live Site</a>
+                        <a href="https://github.com/anyabot/MAD-Viewer" target="_blank" rel="noopener noreferrer" class="btn-secondary">View Source</a>
                     </div>
                 </div>
 
                 <!-- Oshiro Database -->
                 <div class="project-card" data-category="personal web">
                     <div class="project-screenshot">
-                        <img src="public/img/Oshiro%20Database%20-%20Unit%20Detail.png" alt="Oshiro Database castle girl detail with decoded effects and stats">
-                        <img src="public/img/Oshiro%20Database%20-%20Buff%20Ranking.png" alt="Oshiro Database buff ranking">
-                        <img src="public/img/Oshiro%20Database%20-%20Stages.png" alt="Oshiro Database stage list" style="display:none">
-                        <img src="public/img/Oshiro%20Database%20-%20Units.png" alt="Oshiro Database unit list with filters" style="display:none">
+                        <img src="public/img/Oshiro%20Database%20-%20Unit%20Detail.webp" loading="lazy" decoding="async" alt="Oshiro Database castle girl detail with decoded effects and stats">
+                        <img src="public/img/Oshiro%20Database%20-%20Buff%20Ranking.webp" loading="lazy" decoding="async" alt="Oshiro Database buff ranking">
+                        <img src="public/img/Oshiro%20Database%20-%20Stages.webp" loading="lazy" decoding="async" alt="Oshiro Database stage list" style="display:none">
+                        <img src="public/img/Oshiro%20Database%20-%20Units.webp" loading="lazy" decoding="async" alt="Oshiro Database unit list with filters" style="display:none">
                     </div>
                     <div class="project-header">
                         <h3>Oshiro Database</h3>
@@ -238,22 +282,22 @@
                         <span class="tech-tag">Python</span>
                     </div>
                     <div class="project-links">
-                        <a href="https://oshiro.altterisk.cc/" target="_blank" class="btn-primary">View Live Site</a>
-                        <a href="https://github.com/anyabot/Oshiro-Database" target="_blank" class="btn-secondary">View Source</a>
+                        <a href="https://oshiro.altterisk.cc/" target="_blank" rel="noopener noreferrer" class="btn-primary">View Live Site</a>
+                        <a href="https://github.com/anyabot/Oshiro-Database" target="_blank" rel="noopener noreferrer" class="btn-secondary">View Source</a>
                     </div>
                 </div>
 
                 <!-- Last Origin Map (LOMAPR) -->
                 <div class="project-card" data-category="personal web">
                     <div class="project-screenshot">
-                        <img src="public/img/LOMapR%20-%20Home.png" alt="LOMapR home page with current event">
-                        <img src="public/img/LOMapR%20-%20Units.png" alt="LOMapR unit list with filters">
-                        <img src="public/img/LOMapR%20-%20World.png" alt="LOMapR event world page with zones and sub stories" style="display:none">
-                        <img src="public/img/LOMapR%20-%20Equipment.png" alt="LOMapR equipment browser" style="display:none">
-                        <img src="public/img/Enemy%20Info%20Site%20-%20Unit%20Skills.png" alt="Last Origin Map unit detail with skills tab" style="display:none">
-                        <img src="public/img/Enemy%20Info%20Site%20-%20Unit%20Gallery.png" alt="Last Origin Map unit story/CG gallery" style="display:none">
-                        <img src="public/img/Enemy%20Info%20Site%20-%20Enemy%20Detail.png" alt="Last Origin Map enemy detail modal" style="display:none">
-                        <img src="public/img/Enemy%20Info%20Site%20-%20Stage%20Restrictions.png" alt="Last Origin Map Sanctum of Alteration floor restrictions" style="display:none">
+                        <img src="public/img/LOMapR%20-%20Home.webp" loading="lazy" decoding="async" alt="LOMapR home page with current event">
+                        <img src="public/img/LOMapR%20-%20Units.webp" loading="lazy" decoding="async" alt="LOMapR unit list with filters">
+                        <img src="public/img/LOMapR%20-%20World.webp" loading="lazy" decoding="async" alt="LOMapR event world page with zones and sub stories" style="display:none">
+                        <img src="public/img/LOMapR%20-%20Equipment.webp" loading="lazy" decoding="async" alt="LOMapR equipment browser" style="display:none">
+                        <img src="public/img/Enemy%20Info%20Site%20-%20Unit%20Skills.webp" loading="lazy" decoding="async" alt="Last Origin Map unit detail with skills tab" style="display:none">
+                        <img src="public/img/Enemy%20Info%20Site%20-%20Unit%20Gallery.webp" loading="lazy" decoding="async" alt="Last Origin Map unit story/CG gallery" style="display:none">
+                        <img src="public/img/Enemy%20Info%20Site%20-%20Enemy%20Detail.webp" loading="lazy" decoding="async" alt="Last Origin Map enemy detail modal" style="display:none">
+                        <img src="public/img/Enemy%20Info%20Site%20-%20Stage%20Restrictions.webp" loading="lazy" decoding="async" alt="Last Origin Map Sanctum of Alteration floor restrictions" style="display:none">
                     </div>
                     <div class="project-header">
                         <h3>Last Origin Map (LOMAPR)</h3>
@@ -282,23 +326,23 @@
                         <span class="tech-tag">Cloudflare R2</span>
                     </div>
                     <div class="project-links">
-                        <a href="https://lo.altterisk.cc/" target="_blank" class="btn-primary">View Live Site</a>
-                        <a href="https://github.com/anyabot/LOMapR" target="_blank" class="btn-secondary">View Source</a>
+                        <a href="https://lo.altterisk.cc/" target="_blank" rel="noopener noreferrer" class="btn-primary">View Live Site</a>
+                        <a href="https://github.com/anyabot/LOMapR" target="_blank" rel="noopener noreferrer" class="btn-secondary">View Source</a>
                     </div>
                 </div>
 
                 <!-- Aigis Tools -->
                 <div class="project-card" data-category="personal web ai">
                     <div class="project-screenshot">
-                        <img src="public/img/Aigis%20Database%20-%20Units.png" alt="Aigis Database unit list">
-                        <img src="public/img/Aigis%20Database%20-%20Collection.png" alt="Aigis Database collection checker">
-                        <img src="public/img/Aigis%20Database%20-%20Stages.png" alt="Aigis Database running events and stage levels" style="display:none">
-                        <img src="public/img/Aigis%20Database%20-%20DPS.png" alt="Aigis Database DPS calculator" style="display:none">
-                        <img src="public/img/Aigis%20Tools%20-%20Stage%20Enemies.png" alt="Aigis Tools stage enemy data" style="display:none">
-                        <img src="public/img/Aigis%20Tools%20-%20Stage%20Dialogue.png" alt="Aigis Tools stage overview and dialogue" style="display:none">
-                        <img src="public/img/Aigis%20Tools%20-%20Unit%20Detail.png" alt="Aigis Tools unit detail page" style="display:none">
-                        <img src="public/img/Aigis%20Tools%20-%20Buff%20Ranking.png" alt="Aigis Tools buff ranking table" style="display:none">
-                        <img src="public/img/Aigis%20Tools%20-%20Cost%20Generator.png" alt="Aigis Tools cost generation simulator" style="display:none">
+                        <img src="public/img/Aigis%20Database%20-%20Units.webp" loading="lazy" decoding="async" alt="Aigis Database unit list">
+                        <img src="public/img/Aigis%20Database%20-%20Collection.webp" loading="lazy" decoding="async" alt="Aigis Database collection checker">
+                        <img src="public/img/Aigis%20Database%20-%20Stages.webp" loading="lazy" decoding="async" alt="Aigis Database running events and stage levels" style="display:none">
+                        <img src="public/img/Aigis%20Database%20-%20DPS.webp" loading="lazy" decoding="async" alt="Aigis Database DPS calculator" style="display:none">
+                        <img src="public/img/Aigis%20Tools%20-%20Stage%20Enemies.webp" loading="lazy" decoding="async" alt="Aigis Tools stage enemy data" style="display:none">
+                        <img src="public/img/Aigis%20Tools%20-%20Stage%20Dialogue.webp" loading="lazy" decoding="async" alt="Aigis Tools stage overview and dialogue" style="display:none">
+                        <img src="public/img/Aigis%20Tools%20-%20Unit%20Detail.webp" loading="lazy" decoding="async" alt="Aigis Tools unit detail page" style="display:none">
+                        <img src="public/img/Aigis%20Tools%20-%20Buff%20Ranking.webp" loading="lazy" decoding="async" alt="Aigis Tools buff ranking table" style="display:none">
+                        <img src="public/img/Aigis%20Tools%20-%20Cost%20Generator.webp" loading="lazy" decoding="async" alt="Aigis Tools cost generation simulator" style="display:none">
                     </div>
                     <div class="project-header">
                         <h3>Aigis Tools</h3>
@@ -326,19 +370,19 @@
                         <span class="tech-tag">GitHub Pages</span>
                     </div>
                     <div class="project-links">
-                        <a href="https://aigis.altterisk.cc/" target="_blank" class="btn-primary">View Live Site</a>
-                        <a href="https://github.com/Altterisk/Aigis-Enemy" target="_blank" class="btn-secondary">View Source</a>
+                        <a href="https://aigis.altterisk.cc/" target="_blank" rel="noopener noreferrer" class="btn-primary">View Live Site</a>
+                        <a href="https://github.com/Altterisk/Aigis-Enemy" target="_blank" rel="noopener noreferrer" class="btn-secondary">View Source</a>
                     </div>
                 </div>
 
                 <!-- Vcnity -->
                 <div class="project-card" data-category="group web">
                     <div class="project-screenshot">
-                        <img src="public/img/Vcnity%20-%20Dashboard.png" alt="Vcnity dashboard">
-                        <img src="public/img/Vcnity%20-%20Study.png" alt="Vcnity study hub">
-                        <img src="public/img/Vcnity%20-%20Welcome%20BBQ.png" alt="Vcnity events" style="display:none">
-                        <img src="public/img/Vcnity%20-%20Community.png" alt="Vcnity community" style="display:none">
-                        <img src="public/img/Vcnity%20-%20Support%20Services.png" alt="Vcnity support services" style="display:none">
+                        <img src="public/img/Vcnity%20-%20Dashboard.webp" loading="lazy" decoding="async" alt="Vcnity dashboard">
+                        <img src="public/img/Vcnity%20-%20Study.webp" loading="lazy" decoding="async" alt="Vcnity study hub">
+                        <img src="public/img/Vcnity%20-%20Welcome%20BBQ.webp" loading="lazy" decoding="async" alt="Vcnity events" style="display:none">
+                        <img src="public/img/Vcnity%20-%20Community.webp" loading="lazy" decoding="async" alt="Vcnity community" style="display:none">
+                        <img src="public/img/Vcnity%20-%20Support%20Services.webp" loading="lazy" decoding="async" alt="Vcnity support services" style="display:none">
                     </div>
                     <div class="project-header">
                         <h3>Vcnity</h3>
@@ -403,7 +447,7 @@
                         <span class="tech-tag">Tailwind CSS</span>
                     </div>
                     <div class="project-links">
-                        <a href="https://github.com/Altterisk/A1---Learning-Management-System" target="_blank" class="btn-primary">View Source</a>
+                        <a href="https://github.com/Altterisk/A1---Learning-Management-System" target="_blank" rel="noopener noreferrer" class="btn-primary">View Source</a>
                     </div>
                 </div>
 
@@ -437,9 +481,9 @@
                         <span class="tech-tag">Fly.io</span>
                     </div>
                     <div class="project-links">
-                        <a href="https://github.com/anyabot/new-lo-bot" target="_blank" class="btn-secondary">Bot 1 Source</a>
-                        <a href="https://github.com/anyabot/new-quill-bot" target="_blank" class="btn-secondary">Bot 2 Source</a>
-                        <a href="https://github.com/codenetwork/discord-bot-v3" target="_blank" class="btn-secondary">QUT Bot Source</a>
+                        <a href="https://github.com/anyabot/new-lo-bot" target="_blank" rel="noopener noreferrer" class="btn-secondary">Bot 1 Source</a>
+                        <a href="https://github.com/anyabot/new-quill-bot" target="_blank" rel="noopener noreferrer" class="btn-secondary">Bot 2 Source</a>
+                        <a href="https://github.com/codenetwork/discord-bot-v3" target="_blank" rel="noopener noreferrer" class="btn-secondary">QUT Bot Source</a>
                     </div>
                 </div>
 
@@ -471,17 +515,17 @@
                         <span class="tech-tag">GitHub Pages</span>
                     </div>
                     <div class="project-links">
-                        <a href="https://altterisk.github.io/portfolio" target="_blank" class="btn-primary">View Live Site</a>
-                        <a href="https://github.com/Altterisk/portfolio" target="_blank" class="btn-secondary">View Source</a>
+                        <a href="https://altterisk.github.io/portfolio" target="_blank" rel="noopener noreferrer" class="btn-primary">View Live Site</a>
+                        <a href="https://github.com/Altterisk/portfolio" target="_blank" rel="noopener noreferrer" class="btn-secondary">View Source</a>
                     </div>
                 </div>
 
                 <!-- Reverse 1999 Pull Simulator -->
                 <div class="project-card" data-category="personal web">
                     <div class="project-screenshot">
-                        <img src="public/img/Gacha%20Pull%20Simulator%201.png" alt="Gacha Pull Simulator screenshot 1">
-                        <img src="public/img/Gacha%20Pull%20Simulator%202.png" alt="Gacha Pull Simulator screenshot 2">
-                        <img src="public/img/Gacha%20Pull%20Simulator%203.png" alt="Gacha Pull Simulator screenshot 3">
+                        <img src="public/img/Gacha%20Pull%20Simulator%201.webp" loading="lazy" decoding="async" alt="Gacha Pull Simulator screenshot 1">
+                        <img src="public/img/Gacha%20Pull%20Simulator%202.webp" loading="lazy" decoding="async" alt="Gacha Pull Simulator screenshot 2">
+                        <img src="public/img/Gacha%20Pull%20Simulator%203.webp" loading="lazy" decoding="async" alt="Gacha Pull Simulator screenshot 3">
                     </div>
                     <div class="project-header">
                         <h3>Reverse 1999 Pull Simulator</h3>
@@ -509,8 +553,8 @@
                         <span class="tech-tag">Statistics</span>
                     </div>
                     <div class="project-links">
-                        <a href="https://altterisk.github.io/re1999/pull-simulation/" target="_blank" class="btn-primary">Try Simulator</a>
-                        <a href="https://github.com/Altterisk/re1999/tree/main/pull-simulation" target="_blank" class="btn-secondary">View Source</a>
+                        <a href="https://altterisk.github.io/re1999/pull-simulation/" target="_blank" rel="noopener noreferrer" class="btn-primary">Try Simulator</a>
+                        <a href="https://github.com/Altterisk/re1999/tree/main/pull-simulation" target="_blank" rel="noopener noreferrer" class="btn-secondary">View Source</a>
                     </div>
                 </div>
 
@@ -541,9 +585,9 @@
                 <!-- Kanban Demo -->
                 <div class="project-card" data-category="personal web">
                     <div class="project-screenshot">
-                        <img src="public/img/Kanban%20Board%201.png" alt="Kanban Board screenshot 1">
-                        <img src="public/img/Kanban%20Board%202.png" alt="Kanban Board screenshot 2">
-                        <img src="public/img/Kanban%20Board%203.png" alt="Kanban Board screenshot 3">
+                        <img src="public/img/Kanban%20Board%201.webp" loading="lazy" decoding="async" alt="Kanban Board screenshot 1">
+                        <img src="public/img/Kanban%20Board%202.webp" loading="lazy" decoding="async" alt="Kanban Board screenshot 2">
+                        <img src="public/img/Kanban%20Board%203.webp" loading="lazy" decoding="async" alt="Kanban Board screenshot 3">
                     </div>
                     <div class="project-header">
                         <h3>Kanban Board Demo</h3>
@@ -569,8 +613,8 @@
                         <span class="tech-tag">Vercel</span>
                     </div>
                     <div class="project-links">
-                        <a href="https://prroject-planner.vercel.app/" target="_blank" class="btn-primary">View Live Demo</a>
-                        <a href="https://github.com/anyabot/Project-Planner" target="_blank" class="btn-secondary">View Source</a>
+                        <a href="https://prroject-planner.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn-primary">View Live Demo</a>
+                        <a href="https://github.com/anyabot/Project-Planner" target="_blank" rel="noopener noreferrer" class="btn-secondary">View Source</a>
                     </div>
                 </div>
 
@@ -599,8 +643,8 @@
                         <span class="tech-tag">Vercel</span>
                     </div>
                     <div class="project-links">
-                        <a href="https://races-data.vercel.app/" target="_blank" class="btn-primary">View Live Site</a>
-                        <a href="https://github.com/anyabot/RacesData" target="_blank" class="btn-secondary">View Source</a>
+                        <a href="https://races-data.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn-primary">View Live Site</a>
+                        <a href="https://github.com/anyabot/RacesData" target="_blank" rel="noopener noreferrer" class="btn-secondary">View Source</a>
                     </div>
                 </div>
 
@@ -627,23 +671,23 @@
                         <span class="tech-tag">Shizuku API</span>
                     </div>
                     <div class="project-links">
-                        <a href="https://github.com/anyabot/LOModInstaller" target="_blank" class="btn-primary">View Source</a>
+                        <a href="https://github.com/anyabot/LOModInstaller" target="_blank" rel="noopener noreferrer" class="btn-primary">View Source</a>
                     </div>
                 </div>
 
                 <!-- Unity Games -->
                 <div class="project-card" data-category="personal">
                     <div class="project-screenshot">
-                        <img src="public/img/Coin%20Pusher%20Festival%201.jpg" alt="Coin Pusher Festival screenshot 1">
-                        <img src="public/img/Coin%20Pusher%20Festival%202.jpg" alt="Coin Pusher Festival screenshot 2">
-                        <img src="public/img/Coin%20Pusher%20Festival%203.jpg" alt="Coin Pusher Festival screenshot 3" style="display:none">
-                        <img src="public/img/Coin%20Pusher%20Festival%204.jpg" alt="Coin Pusher Festival screenshot 4" style="display:none">
-                        <img src="public/img/Coin%20Pusher%20Festival%205.jpg" alt="Coin Pusher Festival screenshot 5" style="display:none">
-                        <img src="public/img/Journey%20to%20find%20out%201.jpg" alt="Journey to Find Out screenshot 1" style="display:none">
-                        <img src="public/img/Journey%20to%20find%20out%202.jpg" alt="Journey to Find Out screenshot 2" style="display:none">
-                        <img src="public/img/Journey%20to%20find%20out%203.jpg" alt="Journey to Find Out screenshot 3" style="display:none">
-                        <img src="public/img/Journey%20to%20find%20out%204.jpg" alt="Journey to Find Out screenshot 4" style="display:none">
-                        <img src="public/img/Journey%20to%20find%20out%205.jpg" alt="Journey to Find Out screenshot 5" style="display:none">
+                        <img src="public/img/Coin%20Pusher%20Festival%201.webp" loading="lazy" decoding="async" alt="Coin Pusher Festival screenshot 1">
+                        <img src="public/img/Coin%20Pusher%20Festival%202.webp" loading="lazy" decoding="async" alt="Coin Pusher Festival screenshot 2">
+                        <img src="public/img/Coin%20Pusher%20Festival%203.webp" loading="lazy" decoding="async" alt="Coin Pusher Festival screenshot 3" style="display:none">
+                        <img src="public/img/Coin%20Pusher%20Festival%204.webp" loading="lazy" decoding="async" alt="Coin Pusher Festival screenshot 4" style="display:none">
+                        <img src="public/img/Coin%20Pusher%20Festival%205.webp" loading="lazy" decoding="async" alt="Coin Pusher Festival screenshot 5" style="display:none">
+                        <img src="public/img/Journey%20to%20find%20out%201.webp" loading="lazy" decoding="async" alt="Journey to Find Out screenshot 1" style="display:none">
+                        <img src="public/img/Journey%20to%20find%20out%202.webp" loading="lazy" decoding="async" alt="Journey to Find Out screenshot 2" style="display:none">
+                        <img src="public/img/Journey%20to%20find%20out%203.webp" loading="lazy" decoding="async" alt="Journey to Find Out screenshot 3" style="display:none">
+                        <img src="public/img/Journey%20to%20find%20out%204.webp" loading="lazy" decoding="async" alt="Journey to Find Out screenshot 4" style="display:none">
+                        <img src="public/img/Journey%20to%20find%20out%205.webp" loading="lazy" decoding="async" alt="Journey to Find Out screenshot 5" style="display:none">
                     </div>
                     <div class="project-header">
                         <h3>Unity Games Portfolio</h3>
@@ -673,9 +717,9 @@
                         <span class="tech-tag">Git</span>
                     </div>
                     <div class="project-links">
-                        <a href="https://apkpure.com/hyper-block/com.vrillarvn.hyperblock/download" target="_blank" class="btn-secondary">Solo Game 1</a>
-                        <a href="https://apkpure.com/journey-to-find-out/com.journeytofindout" target="_blank" class="btn-secondary">Solo Game 2</a>
-                        <a href="https://apkpure.com/coin-pusher-festival/com.vrillar.coinpusherfestival" target="_blank" class="btn-secondary">Group Game 1</a>
+                        <a href="https://apkpure.com/hyper-block/com.vrillarvn.hyperblock/download" target="_blank" rel="noopener noreferrer" class="btn-secondary">Solo Game 1</a>
+                        <a href="https://apkpure.com/journey-to-find-out/com.journeytofindout" target="_blank" rel="noopener noreferrer" class="btn-secondary">Solo Game 2</a>
+                        <a href="https://apkpure.com/coin-pusher-festival/com.vrillar.coinpusherfestival" target="_blank" rel="noopener noreferrer" class="btn-secondary">Group Game 1</a>
                     </div>
                 </div>
                 </div>
@@ -846,15 +890,17 @@
         </div>
     </section>
 
+    </main>
+
     <!-- Footer -->
     <footer>
         <div class="container">
             <p>&copy; 2026 Thomas Le. All rights reserved.</p>
             <div class="footer-links">
                 <a href="mailto:lttcyborg@gmail.com">Email</a>
-                <a href="https://linkedin.com/in/altterisk" target="_blank">LinkedIn</a>
-                <a href="https://github.com/anyabot" target="_blank">GitHub 1</a>
-                <a href="https://github.com/Altterisk" target="_blank">GitHub 2</a>
+                <a href="https://linkedin.com/in/altterisk" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a href="https://github.com/anyabot" target="_blank" rel="noopener noreferrer">GitHub 1</a>
+                <a href="https://github.com/Altterisk" target="_blank" rel="noopener noreferrer">GitHub 2</a>
             </div>
         </div>
     </footer>
@@ -865,7 +911,7 @@
         <button class="lightbox-prev" id="lightbox-prev" aria-label="Previous image">&#8249;</button>
         <img class="lightbox-img" id="lightbox-img" src="" alt="">
         <button class="lightbox-next" id="lightbox-next" aria-label="Next image">&#8250;</button>
-        <div class="lightbox-counter" id="lightbox-counter"></div>
+        <div class="lightbox-counter" id="lightbox-counter" aria-live="polite"></div>
     </div>
 
     <script src="script.js"></script>

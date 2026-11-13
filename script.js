@@ -178,13 +178,15 @@ if (track && carouselPrev && carouselNext) {
 // Project filtering functionality
 const filterButtons = document.querySelectorAll('.filter-btn');
 const projectCards = document.querySelectorAll('.project-card');
+filterButtons.forEach(btn => btn.setAttribute('aria-pressed', btn.classList.contains('active') ? 'true' : 'false'));
 
 filterButtons.forEach(button => {
     button.addEventListener('click', () => {
         // Remove active class from all buttons
-        filterButtons.forEach(btn => btn.classList.remove('active'));
+        filterButtons.forEach(btn => { btn.classList.remove('active'); btn.setAttribute('aria-pressed', 'false'); });
         // Add active class to clicked button
         button.classList.add('active');
+        button.setAttribute('aria-pressed', 'true');
 
         const filterValue = button.getAttribute('data-filter');
 
@@ -523,18 +525,35 @@ function updateLightboxImage() {
         ? `${lightboxIndex + 1} / ${lightboxImages.length}` : '';
 }
 
+let lightboxReturnFocus = null;
+
 function openLightbox(images, index) {
+    lightboxReturnFocus = document.activeElement;
     lightboxImages = images;
     lightboxIndex = index;
     updateLightboxImage();
     lightbox.classList.add('active');
     document.body.style.overflow = 'hidden';
+    lightboxClose.focus();
 }
 
 function closeLightbox() {
     lightbox.classList.remove('active');
     document.body.style.overflow = '';
     lightboxImg.src = '';
+    if (lightboxReturnFocus && lightboxReturnFocus.focus) lightboxReturnFocus.focus();
+    lightboxReturnFocus = null;
+}
+
+// Make a non-button element act like a button for keyboard and screen-reader users
+function makeActivatable(el, label, onActivate) {
+    el.setAttribute('role', 'button');
+    el.setAttribute('tabindex', '0');
+    el.setAttribute('aria-label', label);
+    el.addEventListener('click', onActivate);
+    el.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onActivate(); }
+    });
 }
 
 // Screenshot: wrap each img in .screenshot-thumb, lightbox clicks, "+N more" tile
@@ -550,7 +569,7 @@ document.querySelectorAll('.project-screenshot').forEach(container => {
         }
         img.parentNode.insertBefore(thumb, img);
         thumb.appendChild(img);
-        thumb.addEventListener('click', () => openLightbox(allImgs, i));
+        makeActivatable(thumb, `View screenshot: ${img.alt || i + 1}`, () => openLightbox(allImgs, i));
     });
 
     const allThumbs = [...container.querySelectorAll('.screenshot-thumb')];
@@ -569,7 +588,7 @@ document.querySelectorAll('.project-screenshot').forEach(container => {
     container.appendChild(moreTile);
 
     const firstHiddenImg = hiddenThumbs[0].querySelector('img');
-    moreTile.addEventListener('click', () => openLightbox(allImgs, allImgs.indexOf(firstHiddenImg)));
+    makeActivatable(moreTile, `View ${hiddenThumbs.length} more screenshots`, () => openLightbox(allImgs, allImgs.indexOf(firstHiddenImg)));
 });
 
 lightboxClose.addEventListener('click', closeLightbox);
@@ -588,6 +607,14 @@ lightboxNext.addEventListener('click', (e) => {
 document.addEventListener('keydown', (e) => {
     if (!lightbox.classList.contains('active')) return;
     if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'Tab') {
+        // Keep focus inside the open dialog
+        const focusables = [lightboxClose, lightboxPrev, lightboxNext].filter(b => !b.disabled);
+        const i = focusables.indexOf(document.activeElement);
+        e.preventDefault();
+        const next = e.shiftKey ? (i <= 0 ? focusables.length - 1 : i - 1) : (i + 1) % focusables.length;
+        focusables[next].focus();
+    }
     if (e.key === 'ArrowLeft' && lightboxIndex > 0) { lightboxIndex--; updateLightboxImage(); }
     if (e.key === 'ArrowRight' && lightboxIndex < lightboxImages.length - 1) { lightboxIndex++; updateLightboxImage(); }
 });
